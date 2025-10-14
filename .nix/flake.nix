@@ -47,7 +47,6 @@
       home-manager,
       nur,
       zen-browser,
-      mac-app-util,
       ...
     }:
     {
