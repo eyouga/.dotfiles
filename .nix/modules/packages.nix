@@ -7,6 +7,7 @@
   environment.systemPackages = with pkgs; [
     neovim
     nixfmt-rfc-style
+    minikube
     fzf
     eza
     zoxide
