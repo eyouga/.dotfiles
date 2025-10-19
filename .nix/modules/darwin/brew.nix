@@ -56,7 +56,7 @@
     casks = [
       "discord"
       "zen"
-      "wezterm"
+      "wezterm@nightly"
       "keepassxc"
       "deezer"
       "obsidian"
