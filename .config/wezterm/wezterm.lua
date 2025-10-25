@@ -18,7 +18,7 @@ end
 
 function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
-		return "Builtin Solarized Dark"
+		return "tokyonight"
 	else
 		return "tokyonight-day"
 	end
@@ -27,18 +27,18 @@ end
 config.color_scheme = scheme_for_appearance(get_appearance())
 config.window_background_opacity = 0.8
 config.macos_window_background_blur = 20
--- config.kde_window_background_blur = true
+config.kde_window_background_blur = true
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 if wezterm.target_triple:find("darwin") ~= nil then
 	config.window_decorations = "RESIZE"
+	config.window_padding = {
+		left = "1cell",
+		right = "1cell",
+		top = "0.5cell",
+		bottom = "0cell",
+	}
 end
-config.window_padding = {
-	left = "1cell",
-	right = "1cell",
-	top = "0.5cell",
-	bottom = "0cell",
-}
 
 config.colors = {
 	tab_bar = {

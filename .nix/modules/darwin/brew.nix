@@ -56,6 +56,7 @@
     casks = [
       "discord"
       "zen"
+      "zen@twilight"
       "wezterm@nightly"
       "keepassxc"
       "deezer"
@@ -73,12 +74,13 @@
       "sage"
     ];
     masApps = {
-      #"Ente Auth" = 6444121398;
+      #  "Ente Auth" = 6444121398;
       #  DaisyDisk = 411643860;
       #  Vimari = 1480933944;
       #  "WiFi Explorer" = 494803304;
       #  "Reeder 5." = 1529448980;
       #  "Okta Extension App" = 1439967473;
+      Whatsapp = 310633997;
     };
   };
 }
