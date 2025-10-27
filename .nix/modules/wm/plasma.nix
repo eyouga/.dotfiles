@@ -24,6 +24,7 @@
     kdePackages.isoimagewriter # Optional: Program to write hybrid ISO files onto USB disks
     kdePackages.partitionmanager # Optional Manage the disk devices, partitions and file systems on your computer
     hardinfo2 # System information and benchmarks for Linux systems
+    inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
     haruna # Open source video player built with Qt/QML and libmpv
     wayland-utils # Wayland utilities
     wl-clipboard # Command-line copy/paste utilities for Wayland
