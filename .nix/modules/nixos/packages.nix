@@ -33,6 +33,8 @@
     zsh.enable = true;
   };
 
+  virtualisation.waydroid.enable = true;
+
   services.syncthing = {
     enable = true;
     group = "users";
