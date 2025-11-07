@@ -63,6 +63,7 @@
       "obsidian"
       "steam"
       "steamcmd"
+      "utm"
       "visual-studio-code"
       "fjordlauncher"
       "protonvpn"
