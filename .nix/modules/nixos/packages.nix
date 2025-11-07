@@ -24,7 +24,12 @@
     thunderbird
     inputs.zen-browser.packages."${system}".default
     inputs.fjordlauncher.packages."${pkgs.system}".fjordlauncher
+    ffado
+    ffado-mixer
   ];
+
+  programs.coolercontrol.enable = true;
+  services.lact.enable = true;
 
   programs = {
     adb.enable = true;
