@@ -62,6 +62,7 @@
       "deezer"
       "obsidian"
       "libreoffice"
+      "league-of-legends"
       "steam"
       "steamcmd"
       "utm"
