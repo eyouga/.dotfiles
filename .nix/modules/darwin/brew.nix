@@ -68,6 +68,7 @@
       "utm"
       "visual-studio-code"
       "fjordlauncher"
+      "kicad"
       "protonvpn"
       "qflipper"
       "kdenlive"
