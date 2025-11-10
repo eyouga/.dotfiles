@@ -59,6 +59,7 @@
       "zen@twilight"
       "wezterm@nightly"
       "keepassxc"
+      "blender"
       "deezer"
       "obsidian"
       "libreoffice"
