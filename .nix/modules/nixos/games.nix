@@ -12,9 +12,19 @@
     capSysAdmin = true;
     openFirewall = true;
   };
+
   programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    enable = true;
+    remotePlay.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+    gamescopeSession.enable = true;
+    protontricks.enable = true;
+    extest.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    mangohud
+    limo
+    nexusmods-app-unfree
+  ];
 }
