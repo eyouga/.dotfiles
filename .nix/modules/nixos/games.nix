@@ -25,6 +25,8 @@
   environment.systemPackages = with pkgs; [
     mangohud
     limo
+    winetricks
     nexusmods-app-unfree
+    protonup-qt
   ];
 }
