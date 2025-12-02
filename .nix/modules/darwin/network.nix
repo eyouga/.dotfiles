@@ -10,7 +10,8 @@
     applicationFirewall = {
       enable = true;
       enableStealthMode = true;
-      blockAllIncoming = true;
+      blockAllIncoming = false;
+      allowSigned = true;
     };
   };
 }
