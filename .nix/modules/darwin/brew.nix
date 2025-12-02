@@ -44,6 +44,8 @@
         name = "syncthing";
         restart_service = true;
       }
+      "scrcpy"
+      "mas"
     ];
     extraConfig = ''
       cask_args appdir: "~/Applications"
@@ -55,9 +57,9 @@
     ];
     casks = [
       "discord"
-      "zen"
       "zen@twilight"
       "iina"
+      "android-platform-tools"
       "vlc"
       "prusaslicer"
       "wezterm@nightly"
