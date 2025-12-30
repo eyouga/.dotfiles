@@ -19,6 +19,7 @@
     protonvpn-gui
     ryubing
     nextcloud-client
+    deezer-enhanced
     obsidian
     xenia-canary
     thunderbird
