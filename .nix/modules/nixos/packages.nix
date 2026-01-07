@@ -21,8 +21,6 @@
     obsidian
     thunderbird
     inputs.zen-browser.packages."${system}".default
-    ffado
-    ffado-mixer
   ];
 
   programs.coolercontrol.enable = true;

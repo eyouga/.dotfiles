@@ -13,6 +13,7 @@
     ./disko-config.nix
     ../../modules/user.nix
     ../../modules/packages.nix
+    ../../modules/nixos/audio.nix
     ../../modules/nixos/games.nix
     ../../modules/nixos/locale.nix
     ../../modules/nixos/packages.nix

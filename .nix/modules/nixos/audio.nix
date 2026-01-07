@@ -1,0 +1,18 @@
+{ config, ... }:
+{
+  boot.kernelModules = [
+    "firewire-ohci"
+    "firewire-core"
+  ];
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    jack.enable = false;
+    alsa.enable = true;
+  };
+  environment.systemPackages = with pkgs; [
+    easyeffects
+    ffado
+    ffado-mixer
+  ];
+}
