@@ -27,13 +27,9 @@
   services.lact.enable = true;
 
   programs = {
-    adb.enable = true;
-    kdeconnect.enable = true;
     ssh.startAgent = true;
     zsh.enable = true;
   };
-
-  virtualisation.waydroid.enable = true;
 
   services.syncthing = {
     enable = true;

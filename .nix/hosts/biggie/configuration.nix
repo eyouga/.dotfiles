@@ -16,6 +16,7 @@
     ../../modules/nixos/audio.nix
     ../../modules/nixos/games.nix
     ../../modules/nixos/locale.nix
+    ../../modules/nixos/android.nix
     ../../modules/nixos/packages.nix
     ../../modules/nixos/maintenance.nix
     ../../modules/nixos/configuration.nix

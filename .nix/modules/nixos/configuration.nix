@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 {
-
   #package config
   nix.package = pkgs.nix;
   nixpkgs.config.allowUnfree = true;
@@ -24,9 +23,11 @@
     enable = true;
     enableZshIntegration = true;
   };
+
   services.printing.enable = true;
 
   networking.networkmanager.enable = true;
+
   users.users.eyouga.extraGroups = [
     "networkmanager"
     "adbusers"
