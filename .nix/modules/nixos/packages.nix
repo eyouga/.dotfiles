@@ -13,18 +13,14 @@
     hunspellDicts.fr-moderne
     hunspellDicts.en_US
     wezterm
-    lutris
     keepassxc
     git-credential-manager
     protonvpn-gui
-    ryubing
     nextcloud-client
     deezer-enhanced
     obsidian
-    xenia-canary
     thunderbird
     inputs.zen-browser.packages."${system}".default
-    inputs.fjordlauncher.packages."${pkgs.system}".fjordlauncher
     ffado
     ffado-mixer
   ];

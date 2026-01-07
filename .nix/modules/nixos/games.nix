@@ -26,7 +26,13 @@
     mangohud
     limo
     winetricks
+    ryubing
+    xenia-canary
+    lutris
     nexusmods-app-unfree
+    prismlauncher
     protonup-qt
+    hydralauncher
+    inputs.fjordlauncher.packages."${pkgs.system}".fjordlauncher
   ];
 }
