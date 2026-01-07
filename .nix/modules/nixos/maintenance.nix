@@ -2,7 +2,7 @@
 {
   system.autoUpgrade = {
     enable = true;
-    flake = "github:username/dotfiles?dir=.nix";
+    flake = "github:eyouga/.dotfiles?dir=.nix";
     flags = [
       "--print-build-logs"
     ];
