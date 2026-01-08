@@ -74,7 +74,7 @@
     useDHCP = lib.mkDefault true;
     # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
     # networking.interfaces.wlp11s0.useDHCP = lib.mkDefault true;
-    networking.networkmanager.enable = true;
+    networkmanager.enable = true;
   };
 
   users.users.eyouga.extraGroups = [
