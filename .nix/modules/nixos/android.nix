@@ -8,4 +8,8 @@
   environment.systemPackages = with pkgs; [
     qtscrcpy
   ];
+  users.users.eyouga.extraGroups = [
+    "adbusers"
+  ];
+
 }

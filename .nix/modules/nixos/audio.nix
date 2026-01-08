@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 {
-  boot.kernelModules = [
-    "firewire-ohci"
-    "firewire-core"
-  ];
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -12,7 +8,5 @@
   };
   environment.systemPackages = with pkgs; [
     easyeffects
-    ffado
-    ffado-mixer
   ];
 }

@@ -6,7 +6,6 @@
   ...
 }:
 {
-
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -14,6 +13,10 @@
   #package config
   nix.package = pkgs.nix;
   nixpkgs.config.allowUnfree = true;
+  programs.nix-index = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   # Enable Nix flakes
   nix.settings.experimental-features = [
@@ -40,29 +43,9 @@
       ];
       kernelModules = [ ];
     };
-
-    kernelModules = [
-      "kvm-amd"
-    ];
-
-    extraModulePackages = [ ];
-  };
-
-  hardware = {
-    i2c.enable = true;
-    bluetooth = {
-      enable = true; # enables support for Bluetooth
-      powerOnBoot = true; # powers up the default Bluetooth controller on boot
-    };
-    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 
   services.fwupd.enable = true;
-
-  programs.nix-index = {
-    enable = true;
-    enableZshIntegration = true;
-  };
 
   services.printing.enable = true;
 
@@ -77,11 +60,6 @@
     networkmanager.enable = true;
   };
 
-  users.users.eyouga.extraGroups = [
-    "networkmanager"
-    "adbusers"
-  ];
-
   services.openssh = {
     enable = true;
     ports = [ 22 ];
@@ -95,6 +73,4 @@
   };
 
   virtualisation.docker.enable = true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
