@@ -83,6 +83,12 @@
       "nextcloud"
       "osu"
       "sage"
+      "qbittorrent"
+      "proton-mail"
+      "mythic"
+      "heroic"
+      "gimp"
+      "anki"
     ];
     masApps = {
       #  "Ente Auth" = 6444121398;
