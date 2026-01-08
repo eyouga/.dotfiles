@@ -9,7 +9,6 @@
 {
   imports = [
     inputs.disko.nixosModules.disko
-    ./hardware-configuration.nix
     ./disko-config.nix
     ../../modules/user.nix
     ../../modules/packages.nix
