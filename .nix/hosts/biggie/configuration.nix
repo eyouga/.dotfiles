@@ -27,11 +27,15 @@
   system.stateVersion = "25.05";
 
   boot = {
-    kernelModules = [
-      "firewire-ohci"
-      "firewire-core"
-      "kvm-amd"
+    blacklistedKernelModules = [
+      "ohci1394"
+      "raw1394"
+      "video1394"
+      "sbp2"
     ];
+    kernelModules = {
+      kvm-amd = true;
+    };
     extraModulePackages = [ ];
   };
 
@@ -42,6 +46,21 @@
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
     };
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  };
+
+  systemd.services.firewire-modules = {
+    description = "Load FireWire modules late so the soundcard gets detected";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "systemd-udev-settle.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = [
+        "${pkgs.kmod}/bin/modprobe firewire-ohci"
+        "${pkgs.kmod}/bin/modprobe firewire-core"
+        "${pkgs.kmod}/bin/modprobe firewire-sbp2"
+      ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
