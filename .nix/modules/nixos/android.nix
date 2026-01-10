@@ -13,7 +13,7 @@
     kdeconnect.enable = true;
   };
   environment.systemPackages = with pkgs; [
-    qtscrcpy
+    scrcpy
     waydroid-helper
   ];
   users.users.eyouga.extraGroups = [
