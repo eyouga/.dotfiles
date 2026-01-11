@@ -32,6 +32,7 @@
       "raw1394"
       "video1394"
       "sbp2"
+      # "snd-dice"
     ];
     kernelModules = {
       kvm-amd = true;
