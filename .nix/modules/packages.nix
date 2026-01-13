@@ -6,7 +6,7 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     neovim
-    nixfmt-rfc-style
+    nixfmt
     minikube
     fzf
     eza
