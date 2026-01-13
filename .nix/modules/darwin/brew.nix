@@ -70,6 +70,7 @@
       "libreoffice"
       "league-of-legends"
       "steam"
+"karabiner-elements"
       "steamcmd"
       "utm"
       "visual-studio-code"
