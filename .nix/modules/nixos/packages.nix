@@ -13,6 +13,7 @@
     hunspellDicts.fr-moderne
     hunspellDicts.en_US
     wezterm
+    podman-compose
     keepassxc
     git-credential-manager
     protonvpn-gui
