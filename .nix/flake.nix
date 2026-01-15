@@ -53,12 +53,6 @@
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/eminem.nix ];
         };
-        # intel-macbook (used for CI to test updates)
-        "intel-macbook" = darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
-          specialArgs = inputs;
-          modules = [ ./hosts/intel-macbook.nix ];
-        };
       };
       nixosConfigurations = {
         biggie = nixpkgs.lib.nixosSystem {

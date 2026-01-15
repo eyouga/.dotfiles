@@ -26,10 +26,6 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
 
-  programs = {
-    kdeconnect.enable = true;
-  };
-
   boot = {
     blacklistedKernelModules = [
       "ohci1394"
@@ -70,8 +66,6 @@
 
   environment.systemPackages = with pkgs; [
     easyeffects
-    ffado
-    ffado-mixer
   ];
 
   users.users.eyouga.extraGroups = [
