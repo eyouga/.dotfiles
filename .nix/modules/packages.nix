@@ -1,10 +1,11 @@
 {
   inputs,
-  #  config,
+  config,
   pkgs,
   ...
 }:
 {
+  programs.nix-index.enable = true;
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     neovim

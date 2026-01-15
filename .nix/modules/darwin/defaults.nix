@@ -1,11 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  #package config
-  nix.package = pkgs.nix;
-  nixpkgs.config.allowUnfree = true;
-  programs.nix-index.enable = true;
-
   # system defaults
 
   system.primaryUser = "eyouga";

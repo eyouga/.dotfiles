@@ -10,13 +10,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  #package config
-  nix.package = pkgs.nix;
-  nixpkgs.config.allowUnfree = true;
-  programs.nix-index = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  programs.nix-index.enableZshIntegration = true;
 
   # Enable Nix flakes
   nix.settings.experimental-features = [
