@@ -13,7 +13,7 @@
     ../modules/darwin/defaults.nix
     ../modules/darwin/brew.nix
     ../modules/darwin/network.nix
-    ../modules/wm/yabai.nix
+    #    ../modules/wm/yabai.nix
   ];
 
   networking.hostName = "eminem";
