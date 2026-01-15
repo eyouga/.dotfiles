@@ -1,9 +1,8 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
-  home-manager,
-  nur,
   ...
 }:
 {
@@ -17,6 +16,7 @@
   ];
 
   networking.hostName = "eminem";
+  nixpkgs.hostPlatform = "aarch64-darwin";
 
   system.defaults.NSGlobalDomain._HIHideMenuBar = lib.mkForce false;
 

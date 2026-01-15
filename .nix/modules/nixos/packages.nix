@@ -21,7 +21,6 @@
     deezer-enhanced
     obsidian
     thunderbird
-    inputs.zen-browser.packages."${system}".default
   ];
 
   programs.coolercontrol.enable = true;

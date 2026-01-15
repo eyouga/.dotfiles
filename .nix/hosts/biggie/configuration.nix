@@ -15,7 +15,7 @@
     ../../modules/nixos/audio.nix
     ../../modules/nixos/games.nix
     ../../modules/nixos/locale.nix
-    ../../modules/nixos/android.nix
+    ../../modules/nixos/waydroid.nix
     ../../modules/nixos/packages.nix
     ../../modules/nixos/maintenance.nix
     ../../modules/nixos/configuration.nix
@@ -25,6 +25,10 @@
   networking.hostName = "biggie";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
+
+  programs = {
+    kdeconnect.enable = true;
+  };
 
   boot = {
     blacklistedKernelModules = [
@@ -73,5 +77,6 @@
   users.users.eyouga.extraGroups = [
     "networkmanager"
     "i2c"
+    "adbusers"
   ];
 }

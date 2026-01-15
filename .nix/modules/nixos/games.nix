@@ -33,6 +33,5 @@
     prismlauncher
     protonup-qt
     hydralauncher
-    inputs.fjordlauncher.packages."${pkgs.system}".fjordlauncher
   ];
 }

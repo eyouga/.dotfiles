@@ -19,7 +19,6 @@
       url = "github:taj-ny/kwin-effects-forceblur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/NUR";
     darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,10 +36,6 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    unmojang = {
-      url = "github:unmojang/homebrew-unmojang";
-      flake = false;
-    };
   };
 
   outputs =
@@ -49,7 +44,6 @@
       nixpkgs,
       darwin,
       home-manager,
-      nur,
       zen-browser,
       ...
     }:
@@ -58,7 +52,7 @@
         # m1-macbook
         "eminem" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = inputs;
+          specialArgs = { inherit inputs; };
           modules = [ ./hosts/eminem.nix ];
         };
         # intel-macbook (used for CI to test updates)

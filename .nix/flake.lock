@@ -79,27 +79,6 @@
         "type": "github"
       }
     },
-    "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": [
-          "nur",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1733312601,
-        "narHash": "sha256-4pDvzqnegAfRkPwO3wmwBhVi/Sye1mzps0zHWYnP88c=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "205b12d8b7cd4802fbcb8e8ef6a0f1408781a4f9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -244,41 +223,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1768127708,
-        "narHash": "sha256-1Sm77VfZh3mU0F5OqKABNLWxOuDeHIlcFjsXeeiPazs=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "ffbc9f8cbaacfb331b6017d5a5abb21a492c9a38",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nur": {
-      "inputs": {
-        "flake-parts": "flake-parts",
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "lastModified": 1768336778,
-        "narHash": "sha256-RUQ8LzDXGuAMzdVTcOgEgOaJO5vKQna/gBETrM7ofjY=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "308fb79cb28b71c74fa7981497fb41885c869c7d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "darwin": "darwin",
@@ -290,8 +234,6 @@
         "kwin-effects-forceblur": "kwin-effects-forceblur",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs",
-        "nur": "nur",
-        "unmojang": "unmojang",
         "zen-browser": "zen-browser"
       }
     },
@@ -307,22 +249,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "unmojang": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1768336949,
-        "narHash": "sha256-rYccAkyWpy3GUwjAlTLRxww64nMXgHsYUjuzNWP0pBU=",
-        "owner": "unmojang",
-        "repo": "homebrew-unmojang",
-        "rev": "6dd98291fac1b7e779babbd6cea13cf62b80ca3c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "unmojang",
-        "repo": "homebrew-unmojang",
         "type": "github"
       }
     },

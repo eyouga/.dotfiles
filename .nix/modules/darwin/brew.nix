@@ -1,14 +1,11 @@
 {
+  inputs,
   config,
-  nix-homebrew,
-  homebrew-core,
-  homebrew-cask,
-  unmojang,
   ...
 }:
 
 {
-  imports = [ nix-homebrew.darwinModules.nix-homebrew ];
+  imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
 
   nix-homebrew = {
     # Install Homebrew under the default prefix
@@ -22,9 +19,8 @@
 
     # Optional: Declarative tap management
     taps = {
-      "homebrew/homebrew-core" = homebrew-core;
-      "homebrew/homebrew-cask" = homebrew-cask;
-      "unmojang/homebrew-unmojang" = unmojang;
+      "homebrew/homebrew-core" = inputs.homebrew-core;
+      "homebrew/homebrew-cask" = inputs.homebrew-cask;
     };
 
     # Optional: Enable fully-declarative tap management
@@ -44,8 +40,6 @@
         name = "syncthing";
         restart_service = true;
       }
-      "scrcpy"
-      "mas"
     ];
     extraConfig = ''
       cask_args appdir: "~/Applications"
@@ -66,11 +60,10 @@
       "libreoffice"
       "league-of-legends"
       "steam"
-      "karabiner-elements"
       "steamcmd"
       "utm"
+      "karabiner-elements"
       "visual-studio-code"
-      "fjordlauncher"
       "kicad"
       "protonvpn"
       "qflipper"
@@ -79,7 +72,7 @@
       "localsend"
       "nextcloud"
       "osu"
-      "sage"
+      #      "sage"
       "qbittorrent"
       "proton-mail"
       "mythic"
