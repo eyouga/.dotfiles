@@ -46,47 +46,47 @@
     '';
     taps = builtins.attrNames config.nix-homebrew.taps;
     casks = [
-      "discord"
-      "zen@twilight"
-      "iina"
-      "android-platform-tools"
-      "vlc"
-      "prusaslicer"
-      "wezterm@nightly"
-      "keepassxc"
-      "blender"
+      #"android-platform-tools"
+      #"anki"
+      #"blender"
       "deezer"
-      "obsidian"
-      "libreoffice"
+      "discord"
+      #"freecad"
+      "gimp"
+      #"heroic"
+      "iina"
+      "karabiner-elements"
+      #"kdenlive"
+      "keepassxc"
+      #"kicad"
       "league-of-legends"
+      "libreoffice"
+      #"localsend"
+      #"mythic"
+      "nextcloud"
+      "obsidian"
+      #"osu"
+      "proton-mail"
+      "protonvpn"
+      #"prusaslicer"
+      #"qbittorrent"
+      #"qflipper"
       "steam"
       "steamcmd"
-      "utm"
-      "karabiner-elements"
-      "visual-studio-code"
-      "kicad"
-      "protonvpn"
-      "qflipper"
-      "kdenlive"
-      "freecad"
-      "localsend"
-      "nextcloud"
-      "osu"
-      #      "sage"
-      "qbittorrent"
-      "proton-mail"
-      "mythic"
-      "heroic"
-      "gimp"
-      "anki"
+      #"utm"
+      #"visual-studio-code"
+      #"vlc"
+      #"sage"
+      #"wezterm@nightly"
+      #"zen@twilight"
     ];
     masApps = {
-      #  "Ente Auth" = 6444121398;
-      #  DaisyDisk = 411643860;
-      #  Vimari = 1480933944;
-      #  "WiFi Explorer" = 494803304;
-      #  "Reeder 5." = 1529448980;
-      #  "Okta Extension App" = 1439967473;
+      #"Ente Auth" = 6444121398;
+      #DaisyDisk = 411643860;
+      #Vimari = 1480933944;
+      #"WiFi Explorer" = 494803304;
+      #"Reeder 5." = 1529448980;
+      #"Okta Extension App" = 1439967473;
       Whatsapp = 310633997;
     };
   };
