@@ -12,6 +12,7 @@
     ../modules/darwin/defaults.nix
     ../modules/darwin/brew.nix
     ../modules/darwin/network.nix
+    ../modules/darwin/packages.nix
     #    ../modules/wm/yabai.nix
   ];
 
