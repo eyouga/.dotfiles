@@ -40,6 +40,7 @@
         name = "syncthing";
         restart_service = true;
       }
+      "mas"
     ];
     extraConfig = ''
       cask_args appdir: "~/Applications"
