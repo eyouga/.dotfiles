@@ -13,13 +13,9 @@
     nerd-fonts.iosevka
   ];
 
-  system.primaryUser = "eyouga";
+  # system defaults
 
-  #system-defaults.nix
-  system.keyboard = {
-    enableKeyMapping = true;
-    remapCapsLockToControl = true;
-  };
+  system.primaryUser = "eyouga";
 
   system.defaults = {
     dock = {
@@ -50,7 +46,6 @@
     };
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
     NSGlobalDomain = {
-      #  AppleInterfaceStyle = "Dark"; # set dark mode
       AppleKeyboardUIMode = 3;
       ApplePressAndHoldEnabled = false;
       NSAutomaticCapitalizationEnabled = false;
@@ -60,7 +55,6 @@
       NSAutomaticSpellingCorrectionEnabled = false;
       NSNavPanelExpandedStateForSaveMode = true;
       NSNavPanelExpandedStateForSaveMode2 = true;
-      _HIHideMenuBar = true; # autohide top panel
     };
   };
   # Add flake support
