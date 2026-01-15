@@ -61,16 +61,8 @@
           modules = [ ./hosts/biggie/configuration.nix ];
         };
         iso = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            (
-              { pkgs, modulesPath, ... }:
-              {
-                imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
-              }
-            )
-            # ./configuration.nix
-          ];
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/isos/x86_64.nix ];
         };
       };
     };
