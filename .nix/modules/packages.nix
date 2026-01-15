@@ -29,4 +29,11 @@
     inputs.zen-browser.packages."${stdenv.hostPlatform.system}".twilight
     inputs.fjordlauncher.packages."${pkgs.stdenv.hostPlatform.system}".fjordlauncher
   ];
+
+  # add nerd fonts
+  fonts.packages = with pkgs; [
+    nerd-fonts.hack
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.iosevka
+  ];
 }

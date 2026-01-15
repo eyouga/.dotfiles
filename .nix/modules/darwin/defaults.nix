@@ -6,13 +6,6 @@
   nixpkgs.config.allowUnfree = true;
   programs.nix-index.enable = true;
 
-  # add nerd fonts
-  fonts.packages = with pkgs; [
-    nerd-fonts.hack
-    nerd-fonts.droid-sans-mono
-    nerd-fonts.iosevka
-  ];
-
   # system defaults
 
   system.primaryUser = "eyouga";
