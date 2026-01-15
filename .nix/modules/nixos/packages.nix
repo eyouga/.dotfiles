@@ -14,8 +14,6 @@
     hunspellDicts.en_US
     wezterm
     podman-compose
-    keepassxc
-    git-credential-manager
     protonvpn-gui
     nextcloud-client
     deezer-enhanced
@@ -29,6 +27,10 @@
   programs = {
     ssh.startAgent = true;
     zsh.enable = true;
+  };
+
+  programs = {
+    kdeconnect.enable = true;
   };
 
   services.syncthing = {

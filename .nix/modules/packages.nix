@@ -13,6 +13,8 @@
     minikube
     fzf
     eza
+    keepassxc
+    git-credential-keepassxc
     zoxide
     stow
     anki
