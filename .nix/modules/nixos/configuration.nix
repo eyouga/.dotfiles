@@ -33,13 +33,7 @@
   services.flatpak.enable = true;
 
   networking = {
-    # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-    # (the default) this is the recommended approach. When using systemd-networkd it's
-    # still possible to use this option, but it's recommended to use it in conjunction
-    # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
     useDHCP = lib.mkDefault true;
-    # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-    # networking.interfaces.wlp11s0.useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
   };
 
@@ -60,12 +54,11 @@
     podman = {
       enable = true;
       dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
     };
   };
 
   users.users.eyouga = {
-    # replace `<USERNAME>` with the actual username
     extraGroups = [
       "podman"
     ];
