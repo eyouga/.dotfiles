@@ -41,10 +41,8 @@
   outputs =
     inputs@{
       self,
-      nixpkgs,
       darwin,
-      home-manager,
-      zen-browser,
+      nixpkgs,
       ...
     }:
     {
