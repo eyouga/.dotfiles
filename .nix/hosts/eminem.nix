@@ -8,7 +8,6 @@
 {
   imports = [
     ../modules/packages.nix
-    ../modules/darwin/m1.nix
     ../modules/darwin/defaults.nix
     ../modules/darwin/brew.nix
     ../modules/darwin/network.nix
