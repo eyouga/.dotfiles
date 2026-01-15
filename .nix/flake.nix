@@ -49,14 +49,12 @@
       darwinConfigurations = {
         # m1-macbook
         "eminem" = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/eminem.nix ];
         };
       };
       nixosConfigurations = {
         biggie = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/biggie/configuration.nix ];
         };
