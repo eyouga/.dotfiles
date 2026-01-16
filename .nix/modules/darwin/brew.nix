@@ -38,6 +38,7 @@
       "anki"
       "deezer"
       "discord"
+      "ente-auth"
       "gimp"
       "iina"
       "karabiner-elements"
