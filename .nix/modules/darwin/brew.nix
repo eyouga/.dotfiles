@@ -8,33 +8,21 @@
   imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
 
   nix-homebrew = {
-    # Install Homebrew under the default prefix
     enable = true;
-
-    # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
     enableRosetta = true;
-
-    # User owning the Homebrew prefix
     user = "eyouga";
-
-    # Optional: Declarative tap management
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
     };
-
-    # Optional: Enable fully-declarative tap management
-    #
-    # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
     mutableTaps = false;
   };
-  #homebrew packages
   homebrew = {
     enable = true;
     user = "eyouga";
     onActivation.autoUpdate = false;
     onActivation.upgrade = true;
-    onActivation.cleanup = "zap"; # Uncomment this if you want all brew packages not defined in this file to be removed when updated
+    onActivation.cleanup = "zap";
     brews = [
       {
         name = "syncthing";
@@ -47,47 +35,21 @@
     '';
     taps = builtins.attrNames config.nix-homebrew.taps;
     casks = [
-      #"android-platform-tools"
-      #"anki"
-      #"blender"
       "deezer"
       "discord"
-      #"freecad"
       "gimp"
-      #"heroic"
       "iina"
       "karabiner-elements"
-      #"kdenlive"
       "keepassxc"
-      #"kicad"
-      "league-of-legends"
       "libreoffice"
-      #"localsend"
-      #"mythic"
       "nextcloud"
       "obsidian"
-      #"osu"
       "proton-mail"
       "protonvpn"
-      #"prusaslicer"
-      #"qbittorrent"
-      #"qflipper"
       "steam"
       "steamcmd"
-      #"utm"
-      #"visual-studio-code"
-      #"vlc"
-      #"sage"
-      #"wezterm@nightly"
-      #"zen@twilight"
     ];
     masApps = {
-      #"Ente Auth" = 6444121398;
-      #DaisyDisk = 411643860;
-      #Vimari = 1480933944;
-      #"WiFi Explorer" = 494803304;
-      #"Reeder 5." = 1529448980;
-      #"Okta Extension App" = 1439967473;
       Whatsapp = 310633997;
     };
   };

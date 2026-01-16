@@ -8,33 +8,33 @@
   programs.nix-index.enable = true;
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
+    anki
+    android-tools
+    bottom
+    eza
+    fzf
+    git
+    git-credential-keepassxc
+    inputs.fjordlauncher.packages."${pkgs.stdenv.hostPlatform.system}".fjordlauncher
+    inputs.zen-browser.packages."${stdenv.hostPlatform.system}".twilight
+    keepassxc
+    lazygit
+    minikube
     neovim
     nixfmt
-    wezterm
-    minikube
-    fzf
-    eza
-    keepassxc
-    git-credential-keepassxc
-    zoxide
-    stow
-    anki
-    zsh
-    bottom
-    git
-    wget
-    lazygit
     scrcpy
-    android-tools
+    stow
+    wezterm
+    wget
     yt-dlp
-    inputs.zen-browser.packages."${stdenv.hostPlatform.system}".twilight
-    inputs.fjordlauncher.packages."${pkgs.stdenv.hostPlatform.system}".fjordlauncher
+    zoxide
+    zsh
   ];
 
   # add nerd fonts
   fonts.packages = with pkgs; [
-    nerd-fonts.hack
     nerd-fonts.droid-sans-mono
+    nerd-fonts.hack
     nerd-fonts.iosevka
   ];
 }
