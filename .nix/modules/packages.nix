@@ -8,7 +8,6 @@
   programs.nix-index.enable = true;
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    anki
     android-tools
     bottom
     eza

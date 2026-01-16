@@ -7,6 +7,7 @@
   environment.systemPackages = with pkgs; [
     vesktop
     libreoffice-qt6-fresh
+    anki
     hunspell
     hunspellDicts.fr-moderne
     hunspellDicts.en_US
