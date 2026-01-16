@@ -5,19 +5,19 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    vesktop
-    libreoffice-qt6-fresh
     anki
+    deezer-enhanced
     hunspell
-    hunspellDicts.fr-moderne
     hunspellDicts.en_US
-    wezterm
+    hunspellDicts.fr-moderne
+    libreoffice-qt6-fresh
+    nextcloud-client
+    obsidian
     podman-compose
     protonvpn-gui
-    nextcloud-client
-    deezer-enhanced
-    obsidian
     thunderbird
+    vesktop
+    wezterm
   ];
 
   programs.coolercontrol.enable = true;
