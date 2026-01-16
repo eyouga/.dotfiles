@@ -50,6 +50,7 @@
       "steamcmd"
     ];
     masApps = {
+      "Canal+" = 694580816;
       Whatsapp = 310633997;
     };
   };
