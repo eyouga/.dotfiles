@@ -23,6 +23,7 @@
     nixfmt
     scrcpy
     stow
+    tre-command
     wezterm
     wget
     yt-dlp

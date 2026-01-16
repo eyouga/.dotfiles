@@ -80,6 +80,7 @@ alias c='clear'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+tre() { command tre "$@" -e && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
 
 # Environment dependent scripts
 if [[ $(uname -o) == "Darwin" ]]; then
