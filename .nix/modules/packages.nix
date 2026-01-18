@@ -18,6 +18,7 @@
     inputs.zen-browser.packages."${stdenv.hostPlatform.system}".twilight
     keepassxc
     lazygit
+    localsend
     minikube
     neovim
     nixfmt
