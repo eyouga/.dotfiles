@@ -22,6 +22,7 @@
     minikube
     neovim
     nixfmt
+    prettier
     scrcpy
     stow
     tre-command
