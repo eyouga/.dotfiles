@@ -35,6 +35,7 @@
     '';
     taps = builtins.attrNames config.nix-homebrew.taps;
     casks = [
+      "android-studio"
       "anki"
       "deezer"
       "discord"
