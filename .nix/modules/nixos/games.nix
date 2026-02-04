@@ -29,7 +29,8 @@
     ryubing
     xenia-canary
     lutris
-    nexusmods-app-unfree
+    rpcs3
+    #  nexusmods-app-unfree
     prismlauncher
     protonup-qt
     hydralauncher
