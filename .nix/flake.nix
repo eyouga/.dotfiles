@@ -44,7 +44,7 @@
     {
       darwinConfigurations = {
         # m1-macbook
-        "eminem" = darwin.lib.darwinSystem {
+        eminem = darwin.lib.darwinSystem {
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/eminem.nix ];
         };
