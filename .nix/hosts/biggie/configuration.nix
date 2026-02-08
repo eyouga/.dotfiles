@@ -15,6 +15,7 @@
     ../../modules/nixos/audio.nix
     ../../modules/nixos/games.nix
     ../../modules/nixos/locale.nix
+    ../../modules/nixos/libvirt.nix
     ../../modules/nixos/waydroid.nix
     ../../modules/nixos/packages.nix
     ../../modules/nixos/maintenance.nix

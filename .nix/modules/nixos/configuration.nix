@@ -50,6 +50,11 @@
   };
 
   virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu.swtpm.enable = true;
+      spiceUSBRedirection.enable = true;
+    };
     containers.enable = true;
     podman = {
       enable = true;
@@ -61,6 +66,7 @@
   users.users.eyouga = {
     extraGroups = [
       "podman"
+      "libvirtd"
     ];
   };
 }

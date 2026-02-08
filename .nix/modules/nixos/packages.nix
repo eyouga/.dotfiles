@@ -7,6 +7,7 @@
   environment.systemPackages = with pkgs; [
     anki
     deezer-enhanced
+    dnsmasq # For virtualisation
     hunspell
     hunspellDicts.en_US
     hunspellDicts.fr-moderne
