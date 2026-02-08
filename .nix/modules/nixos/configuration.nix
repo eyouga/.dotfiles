@@ -53,7 +53,6 @@
     libvirtd = {
       enable = true;
       qemu.swtpm.enable = true;
-      spiceUSBRedirection.enable = true;
     };
     containers.enable = true;
     podman = {
@@ -61,6 +60,7 @@
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
     };
+    spiceUSBRedirection.enable = true;
   };
 
   users.users.eyouga = {
