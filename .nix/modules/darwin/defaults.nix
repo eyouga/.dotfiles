@@ -45,8 +45,4 @@
       NSNavPanelExpandedStateForSaveMode2 = true;
     };
   };
-  # Add flake support
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
 }

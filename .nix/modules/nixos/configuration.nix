@@ -12,12 +12,6 @@
 
   programs.nix-index.enableZshIntegration = true;
 
-  # Enable Nix flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {
