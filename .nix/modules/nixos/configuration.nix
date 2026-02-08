@@ -22,10 +22,6 @@
 
   services.fwupd.enable = true;
 
-  services.printing.enable = true;
-
-  services.flatpak.enable = true;
-
   networking = {
     useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
