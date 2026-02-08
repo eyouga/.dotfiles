@@ -22,11 +22,6 @@
 
   services.fwupd.enable = true;
 
-  networking = {
-    useDHCP = lib.mkDefault true;
-    networkmanager.enable = true;
-  };
-
   services.openssh = {
     enable = true;
     ports = [ 22 ];

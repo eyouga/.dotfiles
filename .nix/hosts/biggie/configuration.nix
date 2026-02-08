@@ -60,6 +60,11 @@
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 
+  networking = {
+    useDHCP = false;
+    networkmanager.enable = true;
+  };
+
   systemd.services.firewire-modules = {
     description = "Load FireWire modules late so the soundcard gets detected";
     wantedBy = [ "multi-user.target" ];
