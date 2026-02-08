@@ -11,6 +11,6 @@
     ../../modules/wm/plasma.nix
   ];
 
-  networking.hostName = "x86_64 Nixos iso";
+  networking.hostName = "liveiso";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
