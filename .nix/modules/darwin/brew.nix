@@ -29,25 +29,28 @@
         restart_service = true;
       }
       "mas"
+      "r"
     ];
     extraConfig = ''
-      cask_args appdir: "~/Applications"
+      cask_args appdir: "~/Applications/Brew"
     '';
     taps = builtins.attrNames config.nix-homebrew.taps;
     casks = [
+      "activitywatch"
       "android-studio"
       "anki"
       "deezer"
       "discord"
       "ente-auth"
+      "geogebra"
       "gimp"
       "karabiner-elements"
       "keepassxc"
       "libreoffice"
       "nextcloud"
-      "obsidian"
       "proton-mail"
       "protonvpn"
+      "rstudio"
       "steam"
       "steamcmd"
     ];
