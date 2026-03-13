@@ -16,7 +16,6 @@
     git-credential-keepassxc
     inputs.fjordlauncher.packages."${pkgs.stdenv.hostPlatform.system}".fjordlauncher
     inputs.zen-browser.packages."${stdenv.hostPlatform.system}".twilight
-    keepassxc
     lazygit
     localsend
     minikube

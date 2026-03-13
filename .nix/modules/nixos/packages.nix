@@ -11,6 +11,7 @@
     hunspell
     hunspellDicts.en_US
     hunspellDicts.fr-moderne
+    keepassxc
     libreoffice-qt6-fresh
     nextcloud-client
     obsidian

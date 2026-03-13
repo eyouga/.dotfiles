@@ -42,6 +42,7 @@
       "ente-auth"
       "gimp"
       "karabiner-elements"
+      "keepassxc"
       "libreoffice"
       "nextcloud"
       "obsidian"
