@@ -12,7 +12,6 @@
     ./disko-config.nix
     ../../modules/user.nix
     ../../modules/packages.nix
-    ../../modules/nixos/locale.nix
     ../../modules/nixos/packages.nix
     ../../modules/nixos/maintenance.nix
     ../../modules/nixos/configuration.nix

@@ -5,7 +5,6 @@
     ../../modules/user.nix
     ../../modules/packages.nix
     ../../modules/nixos/audio.nix
-    ../../modules/nixos/locale.nix
     ../../modules/nixos/packages.nix
     ../../modules/nixos/configuration.nix
     ../../modules/wm/plasma.nix
