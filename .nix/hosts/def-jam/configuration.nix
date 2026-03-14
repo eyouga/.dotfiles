@@ -22,7 +22,7 @@
     ../../modules/wm/plasma.nix
   ];
 
-  networking.hostName = "biggie";
+  networking.hostName = "def-jam";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
 
