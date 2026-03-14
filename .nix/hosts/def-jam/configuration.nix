@@ -12,28 +12,17 @@
     ./disko-config.nix
     ../../modules/user.nix
     ../../modules/packages.nix
-    ../../modules/nixos/audio.nix
-    ../../modules/nixos/games.nix
     ../../modules/nixos/locale.nix
-    ../../modules/nixos/waydroid.nix
     ../../modules/nixos/packages.nix
     ../../modules/nixos/maintenance.nix
     ../../modules/nixos/configuration.nix
-    ../../modules/wm/plasma.nix
   ];
 
   networking.hostName = "def-jam";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 
   boot = {
-    blacklistedKernelModules = [
-      "ohci1394"
-      "raw1394"
-      "video1394"
-      "sbp2"
-      # "snd-dice"
-    ];
     initrd = {
       availableKernelModules = [
         "nvme"
@@ -58,25 +47,6 @@
     };
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
-
-  systemd.services.firewire-modules = {
-    description = "Load FireWire modules late so the soundcard gets detected";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "systemd-udev-settle.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = [
-        "${pkgs.kmod}/bin/modprobe firewire-ohci"
-        "${pkgs.kmod}/bin/modprobe firewire-core"
-        "${pkgs.kmod}/bin/modprobe firewire-sbp2"
-      ];
-    };
-  };
-
-  environment.systemPackages = with pkgs; [
-    easyeffects
-  ];
 
   users.users.eyouga.extraGroups = [
     "networkmanager"
