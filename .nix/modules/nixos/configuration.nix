@@ -36,6 +36,8 @@
     options = "eurosign:e,caps:escape,ctrl:swapcaps";
   };
 
+  hardware.graphics.enable = true;
+
   services.openssh = {
     enable = true;
     ports = [ 22 ];
