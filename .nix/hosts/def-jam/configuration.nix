@@ -12,6 +12,7 @@
     ./disko-config.nix
     ../../modules/nixos/maintenance.nix
     ../../modules/nixos/configuration.nix
+    ../../modules/nixos/nvidia.nix
   ];
 
   networking.hostName = "def-jam";
