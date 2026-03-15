@@ -8,8 +8,7 @@
 {
   services = {
     desktopManager.plasma6.enable = true;
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
+    displayManager.plasma-login-manager.enable = true;
   };
   environment.systemPackages = with pkgs; [
     kdePackages.discover # Optional: Install if you use Flatpak or fwupd firmware update sevice
@@ -19,7 +18,6 @@
     kdePackages.kcolorchooser # A small utility to select a color
     kdePackages.kolourpaint # Easy-to-use paint program
     kdePackages.ksystemlog # KDE SystemLog Application
-    kdePackages.sddm-kcm # Configuration module for SDDM
     kdePackages.merkuro
     kdiff3 # Compares and merges 2 or 3 files or directories
     kdePackages.isoimagewriter # Optional: Program to write hybrid ISO files onto USB disks
