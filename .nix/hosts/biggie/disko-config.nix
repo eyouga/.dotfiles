@@ -8,8 +8,8 @@
           type = "gpt";
           partitions = {
             ESP = {
-	      label = "boot";
-	      name = "ESP";
+              label = "boot";
+              name = "ESP";
               size = "512M";
               type = "EF00";
               content = {
@@ -25,14 +25,18 @@
                 type = "luks";
                 name = "crypted";
                 # disable settings.keyFile if you want to use interactive password entry
-                #passwordFile = "/tmp/secret.key"; # Interactive
+                # passwordFile = "/tmp/secret.key"; # Interactive
                 settings = {
                   allowDiscards = true;
-		  bypassWorkqueues =true;
-		};
+                  bypassWorkqueues = true;
+                };
                 content = {
                   type = "btrfs";
-                  extraArgs = [ "-L" "nixos" "-f" ];
+                  extraArgs = [
+                    "-L"
+                    "nixos"
+                    "-f"
+                  ];
                   subvolumes = {
                     "/root" = {
                       mountpoint = "/";

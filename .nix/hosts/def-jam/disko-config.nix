@@ -8,8 +8,8 @@
           type = "gpt";
           partitions = {
             ESP = {
-	      label = "boot";
-	      name = "ESP";
+              label = "boot";
+              name = "ESP";
               size = "512M";
               type = "EF00";
               content = {
@@ -28,11 +28,15 @@
                 #passwordFile = "/tmp/secret.key"; # Interactive
                 settings = {
                   allowDiscards = true;
-		  bypassWorkqueues =true;
-		};
+                  bypassWorkqueues = true;
+                };
                 content = {
                   type = "btrfs";
-                  extraArgs = [ "-L" "nixos" "-f" ];
+                  extraArgs = [
+                    "-L"
+                    "nixos"
+                    "-f"
+                  ];
                   subvolumes = {
                     "/root" = {
                       mountpoint = "/";
