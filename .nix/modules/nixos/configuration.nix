@@ -11,7 +11,10 @@
     ../configuration.nix
   ];
 
-  programs.nix-index.enableZshIntegration = true;
+  programs = {
+    nix-index.enableZshIntegration = true;
+    nh.enable = true;
+  };
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
