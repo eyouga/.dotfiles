@@ -71,7 +71,6 @@
 
   users.users.eyouga = {
     isNormalUser = true;
-    initialPassword = "aaa";
     extraGroups = [
       "wheel"
       "podman"
