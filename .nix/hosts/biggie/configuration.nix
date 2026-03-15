@@ -10,15 +10,11 @@
   imports = [
     inputs.disko.nixosModules.disko
     ./disko-config.nix
-    ../../modules/configuration.nix
-    ../../modules/packages.nix
-    ../../modules/user.nix
     ../../modules/nixos/audio.nix
+    ../../modules/nixos/desktop.nix
     ../../modules/nixos/games.nix
     ../../modules/nixos/waydroid.nix
-    ../../modules/nixos/packages.nix
     ../../modules/nixos/maintenance.nix
-    ../../modules/nixos/configuration.nix
     ../../modules/wm/plasma.nix
   ];
 

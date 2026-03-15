@@ -8,6 +8,7 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    ../configuration.nix
   ];
 
   programs.nix-index.enableZshIntegration = true;
@@ -64,10 +65,18 @@
     spiceUSBRedirection.enable = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    podman-compose
+  ];
+
   users.users.eyouga = {
+    isNormalUser = true;
+    initialPassword = "aaa";
     extraGroups = [
+      "wheel"
       "podman"
       "libvirtd"
     ];
   };
+
 }

@@ -5,31 +5,18 @@
   ...
 }:
 {
+  imports = [
+    ./configuration.nix
+  ];
   programs.nix-index.enable = true;
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     android-tools
-    bottom
-    eza
-    fzf
-    git
-    git-credential-keepassxc
     inputs.fjordlauncher.packages."${pkgs.stdenv.hostPlatform.system}".fjordlauncher
     inputs.zen-browser.packages."${stdenv.hostPlatform.system}".twilight
-    lazygit
     localsend
-    minikube
-    neovim
-    nixfmt
-    prettier
     scrcpy
-    stow
-    tre-command
-    wezterm
-    wget
     yt-dlp
-    zoxide
-    zsh
   ];
 
   # add nerd fonts

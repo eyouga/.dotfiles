@@ -10,9 +10,6 @@
   imports = [
     inputs.disko.nixosModules.disko
     ./disko-config.nix
-    ../../modules/user.nix
-    ../../modules/packages.nix
-    ../../modules/nixos/packages.nix
     ../../modules/nixos/maintenance.nix
     ../../modules/nixos/configuration.nix
   ];

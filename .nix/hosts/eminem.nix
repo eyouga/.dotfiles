@@ -7,11 +7,10 @@
 }:
 {
   imports = [
-    ../modules/packages.nix
+    ../modules/darwin/desktop.nix
     ../modules/darwin/defaults.nix
     ../modules/darwin/brew.nix
     ../modules/darwin/network.nix
-    ../modules/darwin/packages.nix
   ];
 
   networking.hostName = "eminem";
