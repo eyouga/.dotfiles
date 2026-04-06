@@ -16,7 +16,7 @@
     libreoffice-qt6-fresh
     nextcloud-client
     obsidian
-    protonvpn-gui
+    proton-vpn
     thunderbird
     vesktop
   ];
