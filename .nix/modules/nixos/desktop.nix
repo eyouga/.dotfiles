@@ -22,7 +22,6 @@
   ];
 
   programs.coolercontrol.enable = true;
-  services.lact.enable = true;
 
   programs = {
     ssh.startAgent = true;

@@ -55,6 +55,7 @@
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 
+  services.lact.enable = true;
   networking = {
     useDHCP = false;
     networkmanager.enable = true;
