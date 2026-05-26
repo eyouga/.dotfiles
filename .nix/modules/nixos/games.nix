@@ -6,6 +6,8 @@
   ...
 }:
 {
+  nixpkgs.overlays = [ inputs.millennium.overlays.default ];
+
   services.sunshine = {
     enable = false;
     autoStart = true;
@@ -15,6 +17,7 @@
 
   programs.steam = {
     enable = true;
+    package = pkgs.millennium-steam;
     remotePlay.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
     gamescopeSession.enable = true;
