@@ -31,7 +31,7 @@
     winetricks
     ryubing
     xenia-canary
-    lutris
+    #    lutris
     rpcs3
     #  nexusmods-app-unfree
     prismlauncher
