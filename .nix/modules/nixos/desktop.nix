@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     anki
     deezer-desktop
+    deskflow
     dnsmasq # For virtualisation
     hunspell
     hunspellDicts.en_US

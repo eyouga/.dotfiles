@@ -12,6 +12,7 @@
     enableRosetta = true;
     user = "eyouga";
     taps = {
+      "deskflow/homebrew-tap" = inputs.deskflow-tap;
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
     };
@@ -41,6 +42,7 @@
       "anki"
       "claude"
       "deezer"
+      "deskflow"
       "discord"
       "ente-auth"
       "geogebra"
