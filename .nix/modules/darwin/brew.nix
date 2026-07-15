@@ -9,6 +9,7 @@
 
   nix-homebrew = {
     enable = true;
+    autoMigrate = true;
     enableRosetta = true;
     user = "eyouga";
     taps = {
@@ -38,8 +39,10 @@
     taps = builtins.attrNames config.nix-homebrew.taps;
     casks = [
       "activitywatch"
+      "amethyst"
       "android-studio"
       "anki"
+      "beeper"
       "claude"
       "deezer"
       "deskflow"

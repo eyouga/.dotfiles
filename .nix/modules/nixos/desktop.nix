@@ -7,6 +7,7 @@
 
   environment.systemPackages = with pkgs; [
     anki
+    beeper
     deezer-desktop
     deskflow
     dnsmasq # For virtualisation
