@@ -59,6 +59,10 @@
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/biggie/configuration.nix ];
         };
+        defjam = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/defjam/configuration.nix ];
+        };
         iso = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/isos/x86_64.nix ];
