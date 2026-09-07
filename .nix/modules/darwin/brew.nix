@@ -62,6 +62,7 @@
       "rstudio"
       "steam"
       "steamcmd"
+      "vorssaint"
     ];
     masApps = {
       "Canal+" = 694580816;
