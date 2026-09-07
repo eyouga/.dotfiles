@@ -10,7 +10,7 @@
   nix-homebrew = {
     enable = true;
     autoMigrate = true;
-    enableRosetta = true;
+    enableRosetta = false;
     user = "eyouga";
     taps = {
       "deskflow/homebrew-tap" = inputs.deskflow-tap;
