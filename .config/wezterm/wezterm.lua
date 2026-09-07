@@ -27,7 +27,7 @@ end
 config.color_scheme = scheme_for_appearance(get_appearance())
 config.window_background_opacity = 0.6
 config.macos_window_background_blur = 20
-config.kde_window_background_blur = true
+config.wayland_window_background_blur = true
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 if wezterm.target_triple:find("darwin") ~= nil then
