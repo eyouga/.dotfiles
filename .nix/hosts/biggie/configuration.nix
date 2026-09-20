@@ -22,24 +22,27 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
 
+  # FireWire, if the Saffire PRO 14 is ever revived: the root is LUKS, so
+  # boot.initrd.luks.mitigateDMAAttacks (default true) blacklists
+  # firewire_ohci/_core/_sbp2, and nothing on the bus is ever autodetected.
+  # Re-enable with
+  #   boot.initrd.luks.mitigateDMAAttacks = false;
+  #   boot.blacklistedKernelModules = [ "firewire_sbp2" ];
+  # which keeps SBP-2 -- the protocol that actually grants raw DMA -- disabled.
+  # That much was verified working: the modules autoload and udev binds cleanly.
+  # The interface itself is the open question. On 2026-09-20 it enumerated but
+  # answered "no ack" to every snd_dice transaction on kernels 7.2.3, 7.1.5 and
+  # 6.12.108 alike, and by the end of the evening it had stopped appearing on
+  # the bus at all. Fix the hardware before touching this config again.
   boot = {
-    blacklistedKernelModules = [
-      "ohci1394"
-      "raw1394"
-      "video1394"
-      "sbp2"
-      # "snd-dice"
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
     ];
-    initrd = {
-      availableKernelModules = [
-        "nvme"
-        "xhci_pci"
-        "ahci"
-        "usbhid"
-        "usb_storage"
-        "sd_mod"
-      ];
-    };
     kernelModules = {
       kvm-amd = true;
     };
@@ -61,21 +64,6 @@
     networkmanager.enable = true;
   };
 
-  systemd.services.firewire-modules = {
-    description = "Load FireWire modules late so the soundcard gets detected";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "systemd-udev-settle.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = [
-        "${pkgs.kmod}/bin/modprobe firewire-ohci"
-        "${pkgs.kmod}/bin/modprobe firewire-core"
-        "${pkgs.kmod}/bin/modprobe firewire-sbp2"
-      ];
-    };
-  };
-
   programs.obs-studio = {
     enable = true;
 
@@ -87,10 +75,6 @@
       obs-vkcapture
     ];
   };
-
-  environment.systemPackages = with pkgs; [
-    easyeffects
-  ];
 
   users.users.eyouga.extraGroups = [
     "networkmanager"

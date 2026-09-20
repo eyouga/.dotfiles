@@ -9,5 +9,6 @@
   };
   environment.systemPackages = with pkgs; [
     easyeffects
+    alsa-utils # aplay/amixer -- needed to see ALSA cards directly, e.g. the FireWire interface
   ];
 }
