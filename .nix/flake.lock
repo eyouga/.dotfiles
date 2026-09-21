@@ -148,6 +148,22 @@
         "type": "github"
       }
     },
+    "homebrew-unsigned-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789729239,
+        "narHash": "sha256-CkjUePsiq4B59YPKXriqy9eD77IxF3CkNATOpx7ewsQ=",
+        "owner": "SoftwareRat",
+        "repo": "homebrew-unsigned-tap",
+        "rev": "729a3b3ae37e3ec7ad3cf46dc1c9f27635a7c9d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SoftwareRat",
+        "repo": "homebrew-unsigned-tap",
+        "type": "github"
+      }
+    },
     "kwin-effects-better-blur-dx": {
       "inputs": {
         "nixpkgs": [
@@ -282,6 +298,7 @@
         "fjordlauncher": "fjordlauncher",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
+        "homebrew-unsigned-tap": "homebrew-unsigned-tap",
         "kwin-effects-better-blur-dx": "kwin-effects-better-blur-dx",
         "millennium": "millennium",
         "nix-homebrew": "nix-homebrew",

@@ -37,6 +37,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    homebrew-unsigned-tap = {
+      url = "github:SoftwareRat/homebrew-unsigned-tap";
+      flake = false;
+    };
   };
 
   outputs =
