@@ -9,7 +9,6 @@
     anki
     beeper
     deezer-desktop
-    deskflow
     dnsmasq # For virtualisation
     hunspell
     hunspellDicts.en_US

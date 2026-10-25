@@ -145,7 +145,6 @@ in
       "beeper"
       "claude"
       "deezer"
-      "deskflow/tap/deskflow"
       "discord"
       "eclipse-ide"
       "ente-auth"
