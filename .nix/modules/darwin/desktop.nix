@@ -7,7 +7,7 @@
 
   environment.systemPackages = with pkgs; [
     iina
-    maccy
+    # maccy
     # obsidian
   ];
 }
