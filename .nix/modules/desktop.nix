@@ -14,6 +14,7 @@
     inputs.fjordlauncher.packages."${pkgs.stdenv.hostPlatform.system}".fjordlauncher
     inputs.zen-browser.packages."${stdenv.hostPlatform.system}".beta
     localsend
+    qbittorrent
     scrcpy
     yt-dlp
   ];
