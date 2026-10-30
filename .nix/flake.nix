@@ -67,7 +67,7 @@
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/biggie/configuration.nix ];
         };
-        defjam = nixpkgs.lib.nixosSystem {
+        def-jam = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/def-jam/configuration.nix ];
         };
