@@ -69,7 +69,7 @@
         };
         defjam = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/defjam/configuration.nix ];
+          modules = [ ./hosts/def-jam/configuration.nix ];
         };
         iso = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
