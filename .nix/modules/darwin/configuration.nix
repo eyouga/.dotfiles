@@ -11,6 +11,5 @@
   environment.systemPackages = with pkgs; [
     R
     claude-code
-    nh
   ];
 }

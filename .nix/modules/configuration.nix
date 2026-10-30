@@ -12,6 +12,10 @@
   ];
 
   programs = {
+    nh = {
+      enable = true;
+      flake = "~/.dotfiles/.nix/";
+    };
     nix-index.enable = true;
     zsh.enable = true;
   };
