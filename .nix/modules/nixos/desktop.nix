@@ -22,14 +22,11 @@
     vesktop
   ];
 
-  programs.coolercontrol.enable = true;
-
   programs = {
-    ssh.startAgent = true;
-  };
-
-  programs = {
+    coolercontrol.enable = true;
     kdeconnect.enable = true;
+    ssh.startAgent = true;
+    virt-manager.enable = true;
   };
 
   services.syncthing = {
@@ -43,6 +40,4 @@
   services.printing.enable = true;
 
   services.flatpak.enable = true;
-
-  programs.virt-manager.enable = true;
 }
