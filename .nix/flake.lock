@@ -201,6 +201,22 @@
         "type": "github"
       }
     },
+    "magnuspladsen-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793323920,
+        "narHash": "sha256-nYhAXihb5y6a2wO0IBoXDzo1yFR+ht/dDoleq9Zkxec=",
+        "owner": "magnuspladsen",
+        "repo": "homebrew-tap",
+        "rev": "3c33b18614db2ae67b178737cab65c60761a4159",
+        "type": "github"
+      },
+      "original": {
+        "owner": "magnuspladsen",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
     "millennium": {
       "inputs": {
         "millennium-src": "millennium-src",
@@ -314,6 +330,7 @@
         "homebrew-core": "homebrew-core",
         "homebrew-unsigned-tap": "homebrew-unsigned-tap",
         "kwin-effects-better-blur-dx": "kwin-effects-better-blur-dx",
+        "magnuspladsen-tap": "magnuspladsen-tap",
         "millennium": "millennium",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_2",

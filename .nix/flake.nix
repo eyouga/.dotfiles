@@ -41,6 +41,10 @@
       url = "github:SoftwareRat/homebrew-unsigned-tap";
       flake = false;
     };
+    magnuspladsen-tap = {
+      url = "github:magnuspladsen/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs =

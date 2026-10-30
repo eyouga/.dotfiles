@@ -28,6 +28,7 @@ let
     "homebrew/core" = inputs.homebrew-core;
     "homebrew/cask" = inputs.homebrew-cask;
     "SoftwareRat/unsigned-tap" = inputs.homebrew-unsigned-tap;
+    "magnuspladsen/tap" = inputs.magnuspladsen-tap;
   };
 
   # Homebrew trusts these out of the box and rejects `brew trust` on them.
@@ -131,7 +132,6 @@ in
         restart_service = true;
       }
       "mas"
-      "r"
     ];
     extraConfig = ''
       cask_args appdir: "~/Applications/Brew"
@@ -140,23 +140,18 @@ in
     casks = [
       "activitywatch"
       "amethyst"
-      "android-studio"
-      "anki"
-      "beeper"
       "claude"
-      "claude-code"
       "deezer"
-      "discord"
       "eclipse-ide"
       "ente-auth"
       "gimp"
-      "intellij-idea"
+      "hermes-desktop"
+      "highball"
       "karabiner-elements"
       "kdenlive"
       "keepassxc"
-      "libreoffice"
       "nextcloud"
-      "proton-mail"
+      "magnuspladsen/tap/proton-ish"
       "protonvpn"
       "rstudio"
       "steam"
