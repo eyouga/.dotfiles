@@ -2,3 +2,10 @@ lazy-lock.json
 .DS_Store
 .config/karabiner/automatic_backups/
 /.nix/result
+
+# Live plaintext credentials from the TrueNAS box: a Cloudflare DNS-edit token
+# for eyouga.fr, Postgres and Nextcloud admin passwords. This repo is pulled
+# unauthenticated by modules/nixos/maintenance.nix, so it is public. Scrub
+# before tracking either of these.
+/.nix/hosts/def-jam/truenas_exports/
+/.nix/hosts/def-jam/clusters/
