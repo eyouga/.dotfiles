@@ -14,7 +14,11 @@
   programs = {
     nh = {
       enable = true;
-      flake = "~/.dotfiles/.nix/";
+      # NH_FLAKE is read straight out of the environment, so a "~" in here is
+      # never expanded -- it has to be absolute, and the prefix differs per
+      # platform. The trailing slash is load-bearing too: the module asserts
+      # the path must not end in ".nix", and this directory is named .nix.
+      flake = "${if pkgs.stdenv.hostPlatform.isDarwin then "/Users" else "/home"}/eyouga/.dotfiles/.nix/";
     };
     nix-index.enable = true;
     zsh.enable = true;
