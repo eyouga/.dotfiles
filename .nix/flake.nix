@@ -77,10 +77,19 @@
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/def-jam/configuration.nix ];
         };
-        iso = nixpkgs.lib.nixosSystem {
+        iso-minimal = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/isos/x86_64.nix ];
+          modules = [ ./hosts/isos/minimal.nix ];
         };
+        iso-graphical = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/isos/graphical.nix ];
+        };
+      };
+      # nix build .#iso-minimal / .#iso-graphical
+      packages.x86_64-linux = {
+        iso-minimal = self.nixosConfigurations.iso-minimal.config.system.build.isoImage;
+        iso-graphical = self.nixosConfigurations.iso-graphical.config.system.build.isoImage;
       };
     };
 }
