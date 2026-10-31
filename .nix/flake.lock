@@ -164,6 +164,27 @@
         "type": "github"
       }
     },
+    "impermanence": {
+      "inputs": {
+        "home-manager": [],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792739756,
+        "narHash": "sha256-s0TeXWG5Ci75Y/Hzon0Z7NrN/fG773Rc54/z6oPFszQ=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "fa627f4c8b8e92f58f58a73d99ee4e1304e64eb2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "type": "github"
+      }
+    },
     "kwin-effects-better-blur-dx": {
       "inputs": {
         "nixpkgs": [
@@ -329,6 +350,7 @@
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "homebrew-unsigned-tap": "homebrew-unsigned-tap",
+        "impermanence": "impermanence",
         "kwin-effects-better-blur-dx": "kwin-effects-better-blur-dx",
         "magnuspladsen-tap": "magnuspladsen-tap",
         "millennium": "millennium",

@@ -10,8 +10,12 @@
   imports = [
     inputs.disko.nixosModules.disko
     ./disko-config.nix
+    ./network.nix
+    ./zfs.nix
     ../../modules/nixos/maintenance.nix
     ../../modules/nixos/configuration.nix
+    ../../modules/nixos/impermanence.nix
+    ../../modules/nixos/k3s.nix
     ../../modules/nixos/nvidia.nix
   ];
 
@@ -37,17 +41,67 @@
   };
 
   hardware = {
-    i2c.enable = true;
-    bluetooth = {
-      enable = true; # enables support for Bluetooth
-      powerOnBoot = true; # powers up the default Bluetooth controller on boot
-    };
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    # Jellyfin transcoding on the RTX 2070, wired into k3s later.
+    nvidia-container-toolkit.enable = true;
   };
 
-  users.users.eyouga.extraGroups = [
-    "networkmanager"
-    "i2c"
-    "adbusers"
+  # Flux owns everything above k3s (MIGRATION.md §3); these only make the
+  # bundled extras step aside for the upstream projects.
+  services.k3s.extraFlags = [
+    "--disable=traefik"
+    "--disable=servicelb"
+    "--default-local-storage-path=/var/lib/k8s-volumes"
   ];
+  # Without this, k3s can start before ZFS mounts fast/k8s and write PVCs into
+  # the root subvolume, which the next boot wipes.
+  systemd.services.k3s.unitConfig.RequiresMountsFor = [
+    "/var/lib/k8s-volumes"
+    "/var/lib/k8s-db"
+  ];
+  # Pod-to-pod and pod-to-host traffic (DNS, the API server) over flannel.
+  networking.firewall.trustedInterfaces = [
+    "cni0"
+    "flannel.1"
+  ];
+
+  environment.persistence."/persist" = {
+    directories = [
+      "/var/lib/rancher" # k3s datastore, containerd images
+      "/etc/rancher" # kubeconfig and node password: lose it and the node can't rejoin
+    ];
+    # The rest of /home/eyouga is wiped at every boot. Clone the dotfiles into
+    # /mnt/persist/home/eyouga/.dotfiles at install time.
+    users.eyouga.directories = [
+      ".dotfiles" # this flake (nh points here) and everything stow links
+      {
+        directory = ".ssh";
+        mode = "0700";
+      } # known_hosts; .ssh/config is a stow link inside it
+      ".local/state/zsh" # history (.zshrc keeps it here for this reason)
+      ".local/share/zinit" # zsh plugins: a shell still starts with the network down
+      ".local/share/nvim" # lazy.nvim plugins
+      ".local/state/nvim" # undo history, shada
+    ];
+  };
+
+  # Recreate the stow links in the freshly wiped home. --no-folding: with no
+  # ~/.config yet, stow would link ~/.config itself into the repo, and every
+  # app's settings would land in the dotfiles.
+  systemd.services.stow-dotfiles = {
+    description = "Link ~/.dotfiles into the wiped home";
+    wantedBy = [ "multi-user.target" ];
+    before = [ "sshd.service" ];
+    unitConfig = {
+      RequiresMountsFor = [ "/home/eyouga/.dotfiles" ];
+      ConditionPathExists = "/home/eyouga/.dotfiles/.zshrc"; # not cloned yet: skip
+    };
+    serviceConfig = {
+      Type = "oneshot";
+      User = "eyouga";
+      WorkingDirectory = "/home/eyouga/.dotfiles";
+    };
+    path = [ pkgs.stow ];
+    script = "stow --no-folding --target=/home/eyouga .";
+  };
 }

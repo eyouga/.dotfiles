@@ -10,7 +10,8 @@
   ];
   services.k3s.enable = true;
   services.k3s.role = "server";
-  services.k3s.extraFlags = toString [
+  # A list, so hosts can add their own flags (two lists merge, strings don't).
+  services.k3s.extraFlags = [
     # "--debug" # Optionally add additional args to k3s
   ];
 }
