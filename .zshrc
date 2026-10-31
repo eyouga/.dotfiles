@@ -53,7 +53,10 @@ bindkey '^[w' kill-region
 
 # History
 HISTSIZE=5000
-HISTFILE=~/.zsh_history
+# In a directory, not ~: zsh saves by renaming a temp file over HISTFILE,
+# which fails on def-jam, where only whole directories are persisted.
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
+[[ -d ${HISTFILE:h} ]] || mkdir -p ${HISTFILE:h}
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
 setopt appendhistory
