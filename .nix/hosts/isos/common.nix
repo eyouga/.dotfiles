@@ -2,6 +2,7 @@
 # "nixos" user. installation-device.nix names "nixos" in a handful of places;
 # each one is redirected here (graphical.nix handles the desktop ones).
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -16,6 +17,20 @@
     ../../modules/nixos/locale.nix
     ./tools.nix
   ];
+
+  # What a flashed stick is called: its label in a file manager (stage 1 also
+  # mounts it by this label, hence no spaces and at most 32 characters), the
+  # .iso's file name, and the boot menu, e.g. for the graphical ISO:
+  #   eyouga-live-graphical-26.11, eyouga-live-graphical-26.11-x86_64.iso,
+  #   "eyouga live - NixOS 26.11 - Plasma"
+  # (ASCII only in the menu: isolinux, the BIOS one, reads it as CP437.)
+  isoImage.volumeID = "eyouga-live-${config.isoImage.edition}-${config.system.nixos.release}";
+  # iso-image.nix sets its own as a plain value.
+  image.baseName = lib.mkForce "${config.isoImage.volumeID}-${pkgs.stdenv.hostPlatform.uname.processor}";
+  isoImage.prependToMenuLabel = "eyouga live - ";
+  isoImage.appendToMenuLabel = lib.mkDefault "";
+  # "26.11" rather than "26.11.20261028.e62746b" in the menu and system name.
+  system.nixos.label = config.system.nixos.release;
 
   users.users.nixos.enable = false;
 

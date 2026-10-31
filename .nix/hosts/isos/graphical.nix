@@ -22,6 +22,8 @@
   # Plain, so it beats the plasma6 module's mkDefault: iso-image.nix asserts
   # every specialisation has the same volumeID, which embeds the edition.
   isoImage.edition = "graphical";
+  # Separates the release from each entry's configurationName.
+  isoImage.appendToMenuLabel = " -";
 
   specialisation.plasma.configuration = {
     imports = [
