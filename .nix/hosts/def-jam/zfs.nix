@@ -1,4 +1,10 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  utils,
+  ...
+}:
 {
   # modules/nixos/configuration.nix sets linuxPackages_latest for every host,
   # and ZFS lags it (2.4.4 doesn't build on 7.3). The LTS kernel always has a
@@ -15,6 +21,14 @@
     "fast"
     "tank"
   ];
+
+  # disko gives every dataset a fileSystems entry, and zfs-mount's
+  # `zfs mount -a` raced those mount units on the first boot ("dataset is
+  # busy"). Let the units go first; zfs-mount then only picks up datasets
+  # made by hand later.
+  systemd.services.zfs-mount.after = map (fs: "${utils.escapeSystemdPath fs.mountPoint}.mount") (
+    lib.filter (fs: fs.fsType == "zfs") (lib.attrValues config.fileSystems)
+  );
 
   # Uncapped, the ARC takes up to half of the 64 G and gives it back slower
   # than kubelet's memory accounting expects: pods get OOM-killed.

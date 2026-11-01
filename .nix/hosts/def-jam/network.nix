@@ -20,6 +20,9 @@ in
   systemd.network = {
     enable = true;
     networks."10-lan" = lan;
+    # en* also matches the spare, uncabled enp4s0; without this,
+    # wait-online waits for it until it times out and fails.
+    wait-online.anyInterface = true;
   };
 
   # Unlock the NVMe over SSH after a power cut: `ssh -p 2222 root@192.168.1.80`,
