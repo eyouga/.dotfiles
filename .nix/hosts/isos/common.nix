@@ -56,6 +56,19 @@
   '';
   nix.settings.trusted-users = [ "eyouga" ];
 
+  # Never sleep. A live system often sits untouched while it works over SSH
+  # (a copy, a resilver, SMART tests), and Plasma suspends after 15 idle
+  # minutes, cutting the disks' power: def-jam's first SMART run was lost
+  # that way. Disabled units are linked to /dev/null, so every suspend
+  # request fails, whoever makes it.
+  systemd.targets = lib.genAttrs [
+    "sleep"
+    "suspend"
+    "hibernate"
+    "hybrid-sleep"
+    "suspend-then-hibernate"
+  ] (_: { enable = false; });
+
   # Key or nothing. PasswordAuthentication alone leaves keyboard-interactive
   # (another way to type a password, through PAM) to how PAM happens to be
   # wired; AuthenticationMethods makes sshd itself refuse anything else.
