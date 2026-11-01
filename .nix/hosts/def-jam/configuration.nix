@@ -48,19 +48,14 @@
     nvidia-container-toolkit.enable = true;
   };
 
-  # k3s ships an `nvidia` RuntimeClass but only wires a handler behind it when
-  # it finds the legacy nvidia-container-runtime, which NixOS doesn't use. The
-  # .cdi variant turns a pod's NVIDIA_VISIBLE_DEVICES into devices from the
-  # CDI spec above. Pods ask for `runtimeClassName: nvidia`.
-  services.k3s.containerdConfigTemplate = ''
-    {{ template "base" . }}
-
-    [plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.nvidia]
-      runtime_type = "io.containerd.runc.v2"
-    [plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.nvidia.options]
-      BinaryName = "${lib.getOutput "tools" pkgs.nvidia-container-toolkit}/bin/nvidia-container-runtime.cdi"
-      SystemdCgroup = {{ .SystemdCgroup }}
-  '';
+  # k3s registers a containerd handler for each NVIDIA runtime it finds in its
+  # PATH, in the right config format and cgroup mode. The one used here is
+  # `nvidia-cdi` (nvidia-container-runtime.cdi), which turns a pod's
+  # NVIDIA_VISIBLE_DEVICES into devices from the CDI spec above. Its
+  # RuntimeClass lives in home-ops. (A containerdConfigTemplate doesn't fit:
+  # NixOS writes config.toml.tmpl, which k3s pairs with its v2 base, and
+  # hand-written runtime entries drift from k3s's own settings.)
+  systemd.services.k3s.path = [ (lib.getOutput "tools" pkgs.nvidia-container-toolkit) ];
 
   # Flux owns everything above k3s (MIGRATION.md §3); these only make the
   # bundled extras step aside for the upstream projects.
