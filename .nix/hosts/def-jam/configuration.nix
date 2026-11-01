@@ -57,7 +57,7 @@
   # the root subvolume, which the next boot wipes.
   systemd.services.k3s.unitConfig.RequiresMountsFor = [
     "/var/lib/k8s-volumes"
-    "/var/lib/k8s-db"
+    "/var/lib/k8s-volumes/_db"
   ];
   # Pod-to-pod and pod-to-host traffic (DNS, the API server) over flannel.
   networking.firewall.trustedInterfaces = [

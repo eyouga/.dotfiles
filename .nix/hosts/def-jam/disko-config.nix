@@ -165,9 +165,13 @@ in
             mountpoint = "/var/lib/k8s-volumes";
           };
           # CNPG volumes; Postgres pages are 8K, so small records waste less.
+          # Nested under k8s-volumes because local-path-provisioner only
+          # serves paths in k3s's config (k3s rewrites it): the `fast-db`
+          # StorageClass reaches it with pathPattern `_db/<ns>/<pvc>`. `_`
+          # can't start a namespace name, so no `fast` PVC can collide.
           k8s-db = {
             type = "zfs_fs";
-            mountpoint = "/var/lib/k8s-db";
+            mountpoint = "/var/lib/k8s-volumes/_db";
             options.recordsize = "16K";
           };
         };
