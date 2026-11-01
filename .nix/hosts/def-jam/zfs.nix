@@ -11,6 +11,10 @@
   # matching ZFS, so a nixpkgs bump can't break the nightly autoUpgrade here.
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
   boot.supportedFilesystems.zfs = true;
+  # The 26.11 default; set explicitly to silence the evaluation warning. It
+  # only governs pools imported in the initrd for /, and / is btrfs here.
+  # fast and tank fall under forceImportAll, already false.
+  boot.zfs.forceImportRoot = false;
 
   # Random, but fixed forever: ZFS refuses to auto-import a pool last used by
   # another hostid. Never reuse the old TrueNAS box's (825467552).
