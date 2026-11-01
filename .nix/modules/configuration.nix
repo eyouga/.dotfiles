@@ -40,7 +40,6 @@
     fzf
     git
     lazygit
-    minikube
     neovim
     nixfmt
     prettier
