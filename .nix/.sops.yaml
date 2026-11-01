@@ -1,0 +1,14 @@
+# sops picks the first creation_rule whose path_regex matches. This repo is
+# public: a file no rule matches can't be encrypted at all.
+#
+# age recipients:
+#   eminem (this Mac), the key in sops' default path; same as home-ops':
+#     age1wg79n0lgmaaxc767tntfuly7fhhqtujr7pzuafgs9p7k3sh4tecqvccr7u
+#   def-jam, from its SSH host key (`ssh-to-age` of
+#   /persist/etc/ssh/ssh_host_ed25519_key.pub, 2026-11-01):
+#     age1hd967e855t9dqasxtrlum3ytwsqd58zjxcehzwsndlnfwc6szudqzme9u5
+creation_rules:
+  - path_regex: hosts/def-jam/secrets\.sops\.yaml$
+    age: >-
+      age1wg79n0lgmaaxc767tntfuly7fhhqtujr7pzuafgs9p7k3sh4tecqvccr7u,
+      age1hd967e855t9dqasxtrlum3ytwsqd58zjxcehzwsndlnfwc6szudqzme9u5

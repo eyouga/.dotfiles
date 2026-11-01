@@ -11,6 +11,7 @@
     inputs.disko.nixosModules.disko
     ./disko-config.nix
     ./network.nix
+    ./secrets.nix
     ./zfs.nix
     ../../modules/nixos/maintenance.nix
     ../../modules/nixos/configuration.nix
@@ -42,9 +43,24 @@
 
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    # Jellyfin transcoding on the RTX 2070, wired into k3s later.
+    # The RTX 2070 in pods (Jellyfin, the GPU exporter): writes the CDI spec
+    # in /var/run/cdi at boot. k3s's runtime for it is below.
     nvidia-container-toolkit.enable = true;
   };
+
+  # k3s ships an `nvidia` RuntimeClass but only wires a handler behind it when
+  # it finds the legacy nvidia-container-runtime, which NixOS doesn't use. The
+  # .cdi variant turns a pod's NVIDIA_VISIBLE_DEVICES into devices from the
+  # CDI spec above. Pods ask for `runtimeClassName: nvidia`.
+  services.k3s.containerdConfigTemplate = ''
+    {{ template "base" . }}
+
+    [plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.nvidia]
+      runtime_type = "io.containerd.runc.v2"
+    [plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.nvidia.options]
+      BinaryName = "${lib.getOutput "tools" pkgs.nvidia-container-toolkit}/bin/nvidia-container-runtime.cdi"
+      SystemdCgroup = {{ .SystemdCgroup }}
+  '';
 
   # Flux owns everything above k3s (MIGRATION.md §3); these only make the
   # bundled extras step aside for the upstream projects.

@@ -13,6 +13,10 @@
       # Only its home-manager module needs this, and nothing here uses it.
       inputs.home-manager.follows = "";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";

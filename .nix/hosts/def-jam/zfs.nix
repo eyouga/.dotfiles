@@ -44,8 +44,19 @@
       interval = "monthly";
     };
     trim.enable = true;
-    # Phase 4: ZED_NTFY_TOPIC goes here once the topic has a home outside git
-    # (this repo is public); ZED ships the ntfy notifier itself.
+    # Pool events to ntfy.sh, straight from the host, so a failing disk is
+    # reported even with the cluster down. ZED reports each vdev turning
+    # FAULTED, DEGRADED, REMOVED or UNAVAIL, so a second IronWolf failing
+    # still alerts while tank is already DEGRADED (hdd4 OFFLINE doesn't count).
+    zed.settings = {
+      # zed.rc is a shell file every zedlet sources, so the value can be a
+      # command substitution: the topic stays out of this public repo and
+      # the world-readable store.
+      ZED_NTFY_TOPIC = "$(cat ${config.sops.secrets.ntfy-topic.path})";
+      # Also a push when a healthy pool's scrub or resilver finishes: the
+      # monthly scrub of fast proves this path still works.
+      ZED_NOTIFY_VERBOSE = true;
+    };
   };
 
   services.sanoid = {
