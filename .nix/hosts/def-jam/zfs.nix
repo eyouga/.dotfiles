@@ -99,6 +99,16 @@
         autosnap = true;
         autoprune = true;
       };
+      # Nextcloud's files, hourly too: scripts/rollback.sh takes its database and
+      # code back to an hourly snapshot, and these should be able to meet them. Only
+      # what changed costs space, and a daily already keeps a deleted file for a month.
+      nextcloud-files = {
+        hourly = 24;
+        daily = 30;
+        monthly = 12;
+        autosnap = true;
+        autoprune = true;
+      };
       # Torrents + media (hardlinked, one dataset): two weeks to undo a
       # mistake. Short on purpose: a deleted torrent's space only frees once
       # the last snapshot holding it expires. Mostly re-downloadable; the
@@ -123,7 +133,7 @@
     datasets = {
       "fast/k8s".useTemplate = [ "app" ];
       "fast/k8s-db".useTemplate = [ "app" ];
-      "tank/nextcloud".useTemplate = [ "bulk" ];
+      "tank/nextcloud".useTemplate = [ "nextcloud-files" ];
       "tank/media" = {
         useTemplate = [ "bulk" ];
         recursive = true;
