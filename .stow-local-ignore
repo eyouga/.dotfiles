@@ -27,3 +27,6 @@ _darcs
 \.nix
 
 .stow-global-ignore
+
+# GitHub reads these from the repo; nothing in $HOME needs them.
+\.github

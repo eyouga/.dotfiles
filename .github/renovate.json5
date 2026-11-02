@@ -1,0 +1,43 @@
+// Renovate here does one thing: flake.lock, weekly, merged when the host builds.
+// MIGRATION.md §10 is the reasoning.
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: ["config:recommended", "helpers:pinGitHubActionDigests"],
+  timezone: "Europe/Paris",
+  semanticCommits: "disabled",
+  labels: ["renovate"],
+  enabledManagers: ["nix", "github-actions"],
+
+  // Renovate merges by itself, after seeing every check green on the commit.
+  automerge: false,
+  platformAutomerge: false,
+  automergeType: "pr",
+  automergeStrategy: "squash",
+
+  nix: { enabled: true },
+  // On Saturday, so Sunday's 02:00 upgrade applies it and a reboot alert, if any,
+  // comes on a day someone's home to type the passphrase.
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: ["on saturday"],
+    automerge: true,
+    commitMessageAction: "Weekly flake update:",
+  },
+
+  packageRules: [
+    {
+      description: "The lock as a whole, weekly, not one PR per input",
+      matchManagers: ["nix"],
+      matchUpdateTypes: ["major", "minor", "patch", "digest", "pin", "pinDigest", "rollback", "bump"],
+      enabled: false,
+    },
+    {
+      description: "CI's own actions: they can't reach the host, and CI has no secrets",
+      matchManagers: ["github-actions"],
+      groupName: "CI actions",
+      schedule: ["on saturday"],
+      automerge: true,
+      minimumReleaseAge: "3 days",
+    },
+  ],
+}
