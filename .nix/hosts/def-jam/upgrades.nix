@@ -9,7 +9,7 @@ in
   # flake.lock moves by itself every week and the 02:00 upgrade applies it, so
   # Kubernetes must not move with it: nixpkgs' `k3s` follows the newest minor. This
   # takes patches only; a new minor is a decision, in this line.
-  services.k3s.package = pkgs.k3s_1_36;
+  services.k3s.package = pkgs.k3s_does_not_exist;
 
   # A failed upgrade leaves the old system running, quietly unpatched.
   systemd.services.nixos-upgrade.unitConfig.OnFailure = [ "unit-failed@%N.service" ];
