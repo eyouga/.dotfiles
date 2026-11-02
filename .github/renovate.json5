@@ -21,7 +21,7 @@
     enabled: true,
     schedule: ["on saturday"],
     automerge: true,
-    commitMessageAction: "Weekly flake update:",
+    commitMessageAction: "Weekly flake update",
   },
 
   packageRules: [
