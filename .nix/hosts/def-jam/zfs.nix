@@ -200,7 +200,7 @@
   # copy a torn database. rsync rather than `btrfs send` into a file: plain
   # files on the far side, restorable one by one and without btrfs, and
   # sanoid's snapshots of the target (`bulk`) are the history. 23:30, so
-  # sanoid's midnight daily holds this night's copy.
+  # sanoid's daily (midnight UTC) holds this night's copy.
   # This can't replace the keys in /persist/keys: tank/backup/persist is
   # encrypted with tank.key, so they need a copy off this box (MIGRATION.md §8).
   systemd.services.persist-backup = {
