@@ -99,6 +99,17 @@
         autosnap = true;
         autoprune = true;
       };
+      # Torrents + media (hardlinked, one dataset): two weeks to undo a
+      # mistake. Short on purpose: a deleted torrent's space only frees once
+      # the last snapshot holding it expires. Mostly re-downloadable; the
+      # real second copy is the offsite one.
+      data = {
+        hourly = 0;
+        daily = 14;
+        monthly = 0;
+        autosnap = true;
+        autoprune = true;
+      };
     };
     datasets = {
       "fast/k8s".useTemplate = [ "app" ];
@@ -108,6 +119,7 @@
         useTemplate = [ "bulk" ];
         recursive = true;
       };
+      "tank/data".useTemplate = [ "data" ];
       # tank/torrents: re-downloadable. tank/backup: syncoid's own snapshots.
     };
   };

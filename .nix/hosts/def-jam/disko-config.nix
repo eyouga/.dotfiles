@@ -212,6 +212,17 @@ in
             type = "zfs_fs";
             mountpoint = "/srv/torrents";
           };
+          # Torrents and the media library in one dataset (data/torrents/<cat>,
+          # data/media/{films,series,music}), mounted as one /data volume in
+          # Transmission and the *arrs: link() can't cross datasets or mounts,
+          # so only this way are imports hardlinks instead of copies. Replaces
+          # media/* and torrents above (created by hand on 2026-11-02; those
+          # stay read-only until the move is verified, then go).
+          data = {
+            type = "zfs_fs";
+            mountpoint = "/srv/data";
+            options.recordsize = "1M"; # large, sequentially read files
+          };
           backup = {
             type = "zfs_fs";
             options.mountpoint = "none";
