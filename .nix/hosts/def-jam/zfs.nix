@@ -59,6 +59,27 @@
     };
   };
 
+  # A named snapshot before each app upgrade (fast/k8s@pre-<app>-<version>),
+  # taken from the Mac without sudo. Only `snapshot` (ZFS also demands
+  # `mount` with it; an unprivileged user can't mount on Linux anyway):
+  # rollback and destroy stay root's. The grant is stored in the pool, so
+  # this only re-asserts it at every boot.
+  systemd.services.zfs-allow-snapshots = {
+    description = "Delegate snapshots of the app datasets to eyouga";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "zfs-import.target" ];
+    wants = [ "zfs-import.target" ];
+    path = [ config.boot.zfs.package ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      zfs allow -u eyouga snapshot,mount fast/k8s
+      zfs allow -u eyouga snapshot,mount fast/k8s-db
+    '';
+  };
+
   services.sanoid = {
     enable = true;
     templates = {
