@@ -110,6 +110,15 @@
         autosnap = true;
         autoprune = true;
       };
+      # Replicas: snapshots arrive by syncoid. A longer tail than the source's,
+      # since this is what's left if `fast` dies.
+      replica = {
+        hourly = 0;
+        daily = 30;
+        monthly = 12;
+        autosnap = false;
+        autoprune = true;
+      };
     };
     datasets = {
       "fast/k8s".useTemplate = [ "app" ];
@@ -120,7 +129,133 @@
         recursive = true;
       };
       "tank/data".useTemplate = [ "data" ];
-      # tank/torrents: re-downloadable. tank/backup: syncoid's own snapshots.
+      # The replicas of fast/*: sanoid never snapshots them, it only ages out
+      # what syncoid brings over.
+      "tank/backup/fast" = {
+        useTemplate = [ "replica" ];
+        recursive = true;
+        processChildrenOnly = true;
+      };
+      # The rsync copy of /persist (below) changes once a night.
+      "tank/backup/persist".useTemplate = [ "bulk" ];
+      # tank/torrents: re-downloadable. tank/backup/dumps: dated files, the
+      # pg-dump CronJobs (home-ops) prune them.
     };
+  };
+
+  # fast/* to tank/backup/fast, nightly: a second copy of every app on other
+  # disks. After the pg-dump CronJobs (03:00), before Recyclarr (04:30).
+  services.syncoid = {
+    enable = true;
+    interval = "03:30";
+    commands.fast = {
+      source = "fast";
+      target = "tank/backup/fast";
+      # So a future fast/* is picked up on its own. --skip-parent: `fast`
+      # itself holds nothing, and tank/backup/fast must stay a plain parent.
+      recursive = true;
+      # Not raw (no -w): each replica re-encrypts under tank's key and mounts
+      # with the rest of tank. A raw replica would keep fast's key as its own
+      # encryption root, with keylocation=prompt, and NixOS would then ask for
+      # it at every boot. The offsite machine is where raw belongs: it can
+      # raw-send these replicas as they are.
+      #
+      # Syncoid's sync snapshot is the incremental base: sanoid never prunes
+      # it, and syncoid only drops the old one once the new one has landed, so
+      # a long outage can't lose the base. Hourlies stay on `fast`; @pre-* are
+      # by hand, and on the replica nothing would ever prune them.
+      extraArgs = [
+        "--skip-parent"
+        "--exclude-snaps=_hourly$"
+        "--exclude-snaps=^pre-"
+      ];
+      # -u: this unprivileged user can't mount, so a new replica would fail;
+      # the ExecStartPost mounts it instead. readonly: a restore can't go the
+      # wrong way, and a stray write would be rolled back by the next run. Set
+      # on each child, since a read-only parent can't get new mountpoints.
+      recvOptions = "u o readonly=on";
+      # The module's list, plus what syncoid needs on the target: destroy for
+      # the old sync snapshot (without it they pile up), readonly for -o above.
+      localTargetAllow = [
+        "change-key"
+        "compression"
+        "create"
+        "destroy"
+        "mount"
+        "mountpoint"
+        "readonly"
+        "receive"
+        "rollback"
+      ];
+      service = {
+        unitConfig.OnFailure = [ "backup-failed@%N.service" ];
+        # `-`: a mount that fails doesn't undo a backup that succeeded.
+        serviceConfig.ExecStartPost = "-+${config.boot.zfs.package}/bin/zfs mount -a";
+      };
+    };
+  };
+
+  # /persist is btrfs, so syncoid can't read it. A read-only btrfs snapshot
+  # first: k3s's SQLite datastore is live, and rsync over a moving file would
+  # copy a torn database. rsync rather than `btrfs send` into a file: plain
+  # files on the far side, restorable one by one and without btrfs, and
+  # sanoid's snapshots of the target (`bulk`) are the history. 23:30, so
+  # sanoid's midnight daily holds this night's copy.
+  # This can't replace the keys in /persist/keys: tank/backup/persist is
+  # encrypted with tank.key, so they need a copy off this box (MIGRATION.md §8).
+  systemd.services.persist-backup = {
+    description = "Copy a snapshot of /persist to tank/backup/persist";
+    unitConfig = {
+      # Never into the wiped root, if tank isn't there.
+      RequiresMountsFor = [
+        "/persist"
+        "/srv/backup/persist"
+      ];
+      OnFailure = [ "backup-failed@%N.service" ];
+    };
+    path = [
+      pkgs.btrfs-progs
+      pkgs.rsync
+    ];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      snap=/persist/.backup-snapshot
+      # Left behind by a run that was killed.
+      if [ -e "$snap" ]; then btrfs subvolume delete "$snap"; fi
+      btrfs subvolume snapshot -r /persist "$snap"
+      trap 'btrfs subvolume delete "$snap"' EXIT
+      # Left out: container images (pulled again) and the journal.
+      rsync -aHAX --numeric-ids --one-file-system --delete --delete-excluded \
+        --exclude=/var/lib/rancher/k3s/agent/containerd/ \
+        --exclude=/var/log/journal/ \
+        "$snap/" /srv/backup/persist/
+    '';
+  };
+  systemd.timers.persist-backup = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "23:30";
+      Persistent = true;
+    };
+  };
+
+  # A failed host backup pushes to ntfy like ZED does, cluster up or not.
+  systemd.services."backup-failed@" = {
+    description = "Report failed backup unit %i to ntfy";
+    path = [ pkgs.curl ];
+    scriptArgs = "%i";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      curl -fsS --retry 3 -H "Title: def-jam: $1 failed" -H "Priority: high" \
+        -d "journalctl -u $1" "https://ntfy.sh/$(cat ${config.sops.secrets.ntfy-topic.path})"
+    '';
+  };
+
+  # The pg-dump CronJobs (home-ops) run as Postgres's uid 26, and a hostPath
+  # volume keeps the owner it has. Dumps hold password hashes: not world-readable.
+  systemd.tmpfiles.settings."10-pg-dumps"."/srv/backup/dumps".d = {
+    user = "26";
+    group = "26";
+    mode = "0750";
   };
 }
