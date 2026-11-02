@@ -170,7 +170,7 @@
         "--exclude-snaps=^pre-"
       ];
       # -u: this unprivileged user can't mount, so a new replica would fail;
-      # the ExecStartPost mounts it instead. readonly: a restore can't go the
+      # zfs-mount-replicas mounts it instead. readonly: a restore can't go the
       # wrong way, and a stray write would be rolled back by the next run. Set
       # on each child, since a read-only parent can't get new mountpoints.
       recvOptions = "u o readonly=on";
@@ -188,15 +188,25 @@
         "rollback"
       ];
       service = {
-        unitConfig.OnFailure = [ "backup-failed@%N.service" ];
-        serviceConfig = {
-          # The module leaves it `simple`: "started" would come at once, and the
-          # mount below would run before syncoid has received anything.
-          Type = "oneshot";
-          # `-`: a mount that fails doesn't undo a backup that succeeded.
-          ExecStartPost = "-+${config.boot.zfs.package}/bin/zfs mount -a";
+        unitConfig = {
+          OnFailure = [ "backup-failed@%N.service" ];
+          OnSuccess = [ "zfs-mount-replicas.service" ];
         };
+        # The module leaves it `simple`: "started" would come at once, and
+        # OnSuccess is only meaningful once syncoid has really finished.
+        serviceConfig.Type = "oneshot";
       };
+    };
+  };
+
+  # A new replica's first mount, for file-level restores from its .zfs/snapshot.
+  # Its own unit: syncoid's has PrivateMounts, so even a `+` command mounts
+  # inside that namespace, and the mount is gone when the unit ends.
+  systemd.services.zfs-mount-replicas = {
+    description = "Mount replicas syncoid just created";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${config.boot.zfs.package}/bin/zfs mount -a";
     };
   };
 
