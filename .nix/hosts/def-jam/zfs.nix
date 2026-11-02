@@ -189,8 +189,13 @@
       ];
       service = {
         unitConfig.OnFailure = [ "backup-failed@%N.service" ];
-        # `-`: a mount that fails doesn't undo a backup that succeeded.
-        serviceConfig.ExecStartPost = "-+${config.boot.zfs.package}/bin/zfs mount -a";
+        serviceConfig = {
+          # The module leaves it `simple`: "started" would come at once, and the
+          # mount below would run before syncoid has received anything.
+          Type = "oneshot";
+          # `-`: a mount that fails doesn't undo a backup that succeeded.
+          ExecStartPost = "-+${config.boot.zfs.package}/bin/zfs mount -a";
+        };
       };
     };
   };
