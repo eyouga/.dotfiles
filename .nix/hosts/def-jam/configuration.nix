@@ -12,6 +12,7 @@
     ./disko-config.nix
     ./network.nix
     ./secrets.nix
+    ./upgrades.nix
     ./zfs.nix
     ../../modules/nixos/maintenance.nix
     ../../modules/nixos/configuration.nix

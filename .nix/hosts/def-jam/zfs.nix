@@ -189,7 +189,7 @@
       ];
       service = {
         unitConfig = {
-          OnFailure = [ "backup-failed@%N.service" ];
+          OnFailure = [ "unit-failed@%N.service" ];
           OnSuccess = [ "zfs-mount-replicas.service" ];
         };
         # The module leaves it `simple`: "started" would come at once, and
@@ -226,7 +226,7 @@
         "/persist"
         "/srv/backup/persist"
       ];
-      OnFailure = [ "backup-failed@%N.service" ];
+      OnFailure = [ "unit-failed@%N.service" ];
     };
     path = [
       pkgs.btrfs-progs
@@ -254,9 +254,9 @@
     };
   };
 
-  # A failed host backup pushes to ntfy like ZED does, cluster up or not.
-  systemd.services."backup-failed@" = {
-    description = "Report failed backup unit %i to ntfy";
+  # A failed backup or upgrade pushes to ntfy like ZED does, cluster up or not.
+  systemd.services."unit-failed@" = {
+    description = "Report failed unit %i to ntfy";
     path = [ pkgs.curl ];
     scriptArgs = "%i";
     serviceConfig.Type = "oneshot";
