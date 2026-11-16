@@ -38,11 +38,12 @@ in
       booted_mods=$(readlink -f /run/booted-system/kernel-modules)
       running_mods=$(readlink -f /run/current-system/kernel-modules)
       # In /run on purpose: the reboot this asks for is what clears it. Once per new
-      # system, then weekly.
+      # system, then weekly: find rounds ages down, and a week later the file is a
+      # moment short of 7 days, so +5 (+6 made it every 8 days).
       sent=/run/host-upkeep-reboot-sent
       if [ "$booted$booted_mods" != "$running$running_mods" ]; then
         if [ "$(cat "$sent" 2>/dev/null)" != "$running_mods" ] \
-          || [ -n "$(find "$sent" -mtime +6 2>/dev/null)" ]; then
+          || [ -n "$(find "$sent" -mtime +5 2>/dev/null)" ]; then
           from=$(basename "$(dirname "$booted")")
           to=$(basename "$(dirname "$running")")
           ${push "def-jam needs a reboot" "Running \${from#*-}, installed \${to#*-} (kernel or its modules). After the reboot: ssh -t -p 2222 root@192.168.1.80 systemd-tty-ask-password-agent"}
