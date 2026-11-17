@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   # Same address in the initrd and the running system, so unlocking and
   # everyday SSH both go to 192.168.1.80.
@@ -13,8 +13,22 @@ let
       "1.0.0.1"
     ];
   };
+  # SSH and the k8s API. Over IPv4 from anywhere: only the LAN reaches def-jam
+  # that way, the Freebox forwards nothing to it. Over IPv6 only from link-local
+  # addresses: def-jam has a public IPv6 address, and the Freebox's IPv6 firewall
+  # is a router setting, off by default, that a reset would turn off again.
+  lanOnlyTCPPorts = [
+    22
+    6443
+  ];
 in
 {
+  services.openssh.openFirewall = false;
+  networking.firewall.extraCommands = lib.concatMapStrings (port: ''
+    iptables -A nixos-fw -p tcp --dport ${toString port} -j nixos-fw-accept
+    ip6tables -A nixos-fw -p tcp --dport ${toString port} -s fe80::/10 -j nixos-fw-accept
+  '') lanOnlyTCPPorts;
+
   networking.useDHCP = false;
   networking.useNetworkd = true;
   systemd.network = {
@@ -46,7 +60,11 @@ in
     };
     systemd.network = {
       enable = true;
-      networks."10-lan" = lan;
+      # No public IPv6 address here: the initrd has no firewall, and unlocking
+      # goes over IPv4.
+      networks."10-lan" = lan // {
+        networkConfig.IPv6AcceptRA = false;
+      };
     };
   };
 }
