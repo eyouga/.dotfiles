@@ -9,8 +9,10 @@
 {
   imports = [
     inputs.disko.nixosModules.disko
+    ./backups.nix
     ./disko-config.nix
     ./network.nix
+    ./notify.nix
     ./secrets.nix
     ./upgrades.nix
     ./zfs.nix
