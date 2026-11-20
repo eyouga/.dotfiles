@@ -1,17 +1,17 @@
-# def-jam's disks (MIGRATION.md §3.4): NVMe for the OS, `fast` (SSD mirror)
+# def-jam's disks: NVMe for the OS, `fast` (SSD mirror)
 # for every k8s volume, `tank` (RAIDZ2) for bulk data.
 #
 # Disks are named by-id, never /dev/sdX: those shift when a USB disk is
-# plugged in. Read off the machine from the live ISO on 2026-11-01.
+# plugged in. The installer lists them: ls -l /dev/disk/by-id
 #
-# tank is short one IronWolf: the 4th died before the install. tank is
+# TEMPORARY: until hdd4's replacement is in, tank is short one IronWolf. It is
 # still created 4-wide, with a sparse file standing in for hdd4, then that
 # member is taken offline: RAIDZ2 running degraded, so one disk of
 # redundancy (like RAIDZ1) until the replacement turns it into the real
 # thing. RAIDZ1 could never become RAIDZ2 later; this can.
 #
 # Before running disko, from the installer:
-#   1. Unplug the old TrueNAS USB disks. disko formats what it's pointed at.
+#   1. Unplug every USB disk. disko formats what it's pointed at.
 #   2. Create the ZFS keys disko reads during creation:
 #        head -c 32 /dev/urandom > /tmp/fast.key
 #        head -c 32 /dev/urandom > /tmp/tank.key
@@ -35,7 +35,8 @@
 #   sudo zpool replace tank disk-hdd4-zfs /dev/disk/by-id/<new>-part1
 # then point hdd4 below at it. The resilver rebuilds hdd4's share; tank
 # is full RAIDZ2 when `zpool status tank` says ONLINE, listing the new disk
-# by its by-id name. (All of this was rehearsed on virtual disks first.)
+# by its by-id name. (Rehearsed on virtual disks, before the install on
+# 2026-11-01.)
 let
   nvme = "nvme-CT500P3SSD8_240746EDEFF3"; # Crucial P3 500 GB
   ssd1 = "ata-KINGSTON_SA400S37480G_50026B7785827EDC";
@@ -43,7 +44,7 @@ let
   hdd1 = "ata-ST4000VN006-3CW104_WW6A8ZH3";
   hdd2 = "ata-ST4000VN006-3CW104_WW63K7YA";
   hdd3 = "ata-ST4000VN006-3CW104_WW639DKY";
-  # The stand-in from step 3, until the replacement disk arrives.
+  # TEMPORARY: until the replacement disk arrives: the stand-in from step 3.
   hdd4 = "/dev/loop9";
 
   byId = name: "/dev/disk/by-id/${name}";
@@ -215,9 +216,9 @@ in
           # Torrents and the media library in one dataset (data/torrents/<cat>,
           # data/media/{films,series,music}), mounted as one /data volume in
           # Transmission and the *arrs: link() can't cross datasets or mounts,
-          # so only this way are imports hardlinks instead of copies. Replaces
-          # media/* and torrents above (created by hand on 2026-11-02; those
-          # stay read-only until the move is verified, then go).
+          # so only this way are imports hardlinks instead of copies.
+          # TEMPORARY: until media/* and torrents above are destroyed (the
+          # removal list): they're the layout this dataset replaced.
           data = {
             type = "zfs_fs";
             mountpoint = "/srv/data";

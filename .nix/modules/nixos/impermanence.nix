@@ -11,7 +11,7 @@
 {
   imports = [ inputs.impermanence.nixosModules.impermanence ];
 
-  # The initrd is always systemd now, so the rollback is a stage-1 unit that
+  # The initrd is always systemd, so the rollback is a stage-1 unit that
   # runs between unlocking LUKS and mounting /.
   boot.initrd.systemd = {
     initrdBin = [

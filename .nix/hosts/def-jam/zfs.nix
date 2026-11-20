@@ -17,7 +17,8 @@
   boot.zfs.forceImportRoot = false;
 
   # Random, but fixed forever: ZFS refuses to auto-import a pool last used by
-  # another hostid. Never reuse the old TrueNAS box's (825467552).
+  # another hostid. Never the old disks' (825467552): they'd import on their own.
+  # TEMPORARY: until the old disks are wiped.
   networking.hostId = "6b24977d";
 
   # Imported in stage 2, after /persist (and so the key files) is mounted.
@@ -134,6 +135,7 @@
       "fast/k8s".useTemplate = [ "app" ];
       "fast/k8s-db".useTemplate = [ "app" ];
       "tank/nextcloud".useTemplate = [ "nextcloud-files" ];
+      # TEMPORARY: until tank/media is destroyed (the removal list).
       "tank/media" = {
         useTemplate = [ "bulk" ];
         recursive = true;
@@ -148,8 +150,8 @@
       };
       # The rsync copy of /persist (below) changes once a night.
       "tank/backup/persist".useTemplate = [ "bulk" ];
-      # tank/torrents: re-downloadable. tank/backup/dumps: dated files, the
-      # pg-dump CronJobs (home-ops) prune them.
+      # Not snapshotted: tank/backup/dumps, dated files the pg-dump CronJobs
+      # (home-ops) prune; and tank/torrents, re-downloadable and on the removal list.
     };
   };
 
@@ -227,7 +229,7 @@
   # sanoid's snapshots of the target (`bulk`) are the history. 23:30, so
   # sanoid's daily (midnight UTC) holds this night's copy.
   # This can't replace the keys in /persist/keys: tank/backup/persist is
-  # encrypted with tank.key, so they need a copy off this box (MIGRATION.md §8).
+  # encrypted with tank.key, so they need a copy off this box, kept by hand.
   systemd.services.persist-backup = {
     description = "Copy a snapshot of /persist to tank/backup/persist";
     unitConfig = {

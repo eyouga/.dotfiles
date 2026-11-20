@@ -20,7 +20,7 @@ in
   # or ZFS userland against an old module breaks NVENC or `zfs` until the reboot),
   # whereas a new initrd isn't running anywhere, the next boot just uses it. It
   # changes with almost every nixpkgs bump, so counting it would cry wolf weekly.
-  # The second check is the other way this phase can fail silently: Renovate or the
+  # The second check is the other way this automation can fail silently: Renovate or the
   # upgrade stopped, and nothing is left to go red.
   systemd.services.host-upkeep-check = {
     description = "Tell the phone if def-jam needs a reboot or stopped getting updates";

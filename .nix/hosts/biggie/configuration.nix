@@ -30,10 +30,9 @@
   #   boot.blacklistedKernelModules = [ "firewire_sbp2" ];
   # which keeps SBP-2 -- the protocol that actually grants raw DMA -- disabled.
   # That much was verified working: the modules autoload and udev binds cleanly.
-  # The interface itself is the open question. On 2026-09-20 it enumerated but
-  # answered "no ack" to every snd_dice transaction on kernels 7.2.3, 7.1.5 and
-  # 6.12.108 alike, and by the end of the evening it had stopped appearing on
-  # the bus at all. Fix the hardware before touching this config again.
+  # The interface itself is the open question: it enumerates but answers "no
+  # ack" to every snd_dice transaction, on kernels 6.12 to 7.2 alike, and can
+  # drop off the bus entirely. Fix the hardware before touching this config again.
   boot = {
     initrd.availableKernelModules = [
       "nvme"

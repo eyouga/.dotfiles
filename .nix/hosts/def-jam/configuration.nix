@@ -58,7 +58,7 @@
   # hand-written runtime entries drift from k3s's own settings.)
   systemd.services.k3s.path = [ (lib.getOutput "tools" pkgs.nvidia-container-toolkit) ];
 
-  # Flux owns everything above k3s (MIGRATION.md §3); these only make the
+  # Flux owns everything above k3s (the home-ops repo); these only make the
   # bundled extras step aside for the upstream projects.
   services.k3s.extraFlags = [
     "--disable=traefik"

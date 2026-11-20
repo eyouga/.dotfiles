@@ -5,7 +5,7 @@
 #   eminem (this Mac), the key in sops' default path; same as home-ops':
 #     age1wg79n0lgmaaxc767tntfuly7fhhqtujr7pzuafgs9p7k3sh4tecqvccr7u
 #   def-jam, from its SSH host key (`ssh-to-age` of
-#   /persist/etc/ssh/ssh_host_ed25519_key.pub, 2026-11-01):
+#   /persist/etc/ssh/ssh_host_ed25519_key.pub):
 #     age1hd967e855t9dqasxtrlum3ytwsqd58zjxcehzwsndlnfwc6szudqzme9u5
 creation_rules:
   - path_regex: hosts/def-jam/secrets\.sops\.yaml$
