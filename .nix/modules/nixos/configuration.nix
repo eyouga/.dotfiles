@@ -27,8 +27,13 @@
   services.openssh = {
     enable = true;
     ports = [ 22 ];
+    # Key or nothing. PasswordAuthentication alone leaves keyboard-interactive
+    # (another way to type a password, through PAM) on, as NixOS defaults it;
+    # AuthenticationMethods makes sshd itself refuse anything else.
     settings = {
       PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      AuthenticationMethods = "publickey";
       AllowUsers = [ "eyouga" ];
       UseDns = true;
       X11Forwarding = false;
