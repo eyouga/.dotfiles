@@ -46,4 +46,7 @@ awk 'NR == FNR { was[$1] = $2; next }
   was[$1] != $2 { print "differs: " $1 }
   { delete was[$1] }
   END { for (h in was) print "gone:    " h }' "$tmp/before" "$tmp/after" | sort >"$tmp/report"
-[ ! -s "$tmp/report" ] || { cat "$tmp/report"; exit 1; }
+[ ! -s "$tmp/report" ] || {
+  cat "$tmp/report"
+  exit 1
+}
