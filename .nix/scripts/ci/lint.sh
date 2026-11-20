@@ -29,7 +29,8 @@ for f in "${zsh[@]}" .p10k.zsh; do zsh -n "$f" || fail "zsh -n $f"; done
 actionlint || fail actionlint
 
 # Open work is done, marked TEMPORARY with its end, or on the open list.
-if git grep -n -w -E 'TODO|FIXME' -- . "$mine" ':!.p10k.zsh'; then
+# CONTRIBUTING.md and CLAUDE.md state this rule, so they name the words.
+if git grep -n -w -E 'TODO|FIXME' -- . "$mine" ':!.p10k.zsh' ':!CONTRIBUTING.md' ':!CLAUDE.md'; then
   fail "TODO or FIXME: do it, mark it 'TEMPORARY: until <condition>', or put it on the open list"
 fi
 if git grep -n 'TEMPORARY' -- . "$mine" | grep -v 'TEMPORARY: until '; then

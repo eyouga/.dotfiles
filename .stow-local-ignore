@@ -34,3 +34,8 @@ _darcs
 # Repo tooling, read in place. Linked into $HOME it would apply to everything there.
 ^/\.editorconfig
 ^/\.luacheckrc
+# The repository's own docs and Claude Code's files. A ~/CLAUDE.md would be loaded by
+# every Claude session under $HOME.
+^/CLAUDE.*
+^/CONTRIBUTING.*
+\.claude
