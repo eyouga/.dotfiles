@@ -120,9 +120,15 @@ in
       "highball"
       "karabiner-elements"
       "kdenlive"
+      # On Homebrew because nixpkgs signs macOS apps ad hoc, with no team or
+      # entitlements: Touch ID unlock needs keychain group
+      # G2S7P7J672.org.keepassxc.keepassxc, honoured only for that team's
+      # signature (NixOS/nixpkgs#241103). Nix can't fix it: it would need
+      # KeePassXC's key.
       "keepassxc"
       "nextcloud"
       "magnuspladsen/tap/proton-ish"
+      # On Homebrew for the same reason: it ships a system extension.
       "protonvpn"
       "rstudio"
       "steam"
