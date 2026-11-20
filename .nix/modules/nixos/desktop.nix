@@ -14,7 +14,7 @@
     hunspellDicts.en_US
     hunspellDicts.fr-moderne
     keepassxc
-    libreoffice-qt6-fresh
+    libreoffice-qt
     nextcloud-client
     obsidian
     proton-vpn
