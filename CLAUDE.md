@@ -22,7 +22,7 @@ My machines: the NixOS hosts and the Mac under `.nix/`, and config linked into
   there.
 - `.nix/hosts/def-jam/MIGRATION.md` (the open list) and `MIGRATION-log.md` (frozen
   history) are local and gitignored. Read §1 and §2 before def-jam work.
-- TEMPORARY: until the migration's last phase (Phase 12) is done: no Learn-by-Doing
+- TEMPORARY: until the migration's last phase (Phase 11) is done: no Learn-by-Doing
   exercises or `TODO(human)` on def-jam work, whatever the output style asks. Decide,
   implement, verify, explain briefly.
 
