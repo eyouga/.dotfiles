@@ -61,13 +61,18 @@
   # minutes, cutting the disks' power: def-jam's first SMART run was lost
   # that way. Disabled units are linked to /dev/null, so every suspend
   # request fails, whoever makes it.
-  systemd.targets = lib.genAttrs [
-    "sleep"
-    "suspend"
-    "hibernate"
-    "hybrid-sleep"
-    "suspend-then-hibernate"
-  ] (_: { enable = false; });
+  systemd.targets =
+    lib.genAttrs
+      [
+        "sleep"
+        "suspend"
+        "hibernate"
+        "hybrid-sleep"
+        "suspend-then-hibernate"
+      ]
+      (_: {
+        enable = false;
+      });
 
   # Key or nothing. PasswordAuthentication alone leaves keyboard-interactive
   # (another way to type a password, through PAM) to how PAM happens to be

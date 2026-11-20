@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+_: {
   system.autoUpgrade = {
     enable = true;
     flake = "github:eyouga/.dotfiles?dir=.nix";

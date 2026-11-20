@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+_: {
   networking.firewall.allowedTCPPorts = [
     # 6443, the API server: pods reach it over cni0, a trusted interface. The host
     # opens it to the LAN itself (def-jam: network.nix, link-local only over IPv6).
