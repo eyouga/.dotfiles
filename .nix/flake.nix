@@ -35,20 +35,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    deskflow-tap = {
-      url = "github:deskflow/homebrew-tap";
-      flake = false;
-    };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
     };
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-    homebrew-unsigned-tap = {
-      url = "github:SoftwareRat/homebrew-unsigned-tap";
       flake = false;
     };
     magnuspladsen-tap = {

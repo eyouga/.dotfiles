@@ -19,15 +19,13 @@ let
   # The only place a tap is spelled out by hand.
   #
   # Key is the Homebrew tap name, i.e. the "owner/tap" you write inside a
-  # fully-qualified package such as "SoftwareRat/unsigned-tap/geogebra".
+  # fully-qualified package such as "magnuspladsen/tap/proton-ish".
   # The git repo nix-homebrew actually clones is "owner/homebrew-tap".
   #
   # Adding a tap = one flake input + one line here. Everything below is derived.
   tapSources = {
-    "deskflow/tap" = inputs.deskflow-tap;
     "homebrew/core" = inputs.homebrew-core;
     "homebrew/cask" = inputs.homebrew-cask;
-    "SoftwareRat/unsigned-tap" = inputs.homebrew-unsigned-tap;
     "magnuspladsen/tap" = inputs.magnuspladsen-tap;
   };
 
@@ -69,25 +67,6 @@ let
       p = splitString "/" tap;
     in
     "${elemAt p 0}/homebrew-${elemAt p 1}";
-
-  # Activation-time trust is already handled: nix-darwin defaults every brew
-  # and cask submodule to `trusted = true`, which stamps `trusted: true` onto
-  # its Brewfile line -- but only for fully-qualified names, which is why every
-  # third-party package above is written as "owner/tap/pkg".
-  #
-  # These three lists are the *other* layer: `brew trust --tap/--formula/--cask`,
-  # run during activation, writing entries that persist outside the Brewfile so
-  # a later interactive `brew install` also works. Note the asymmetry -- Homebrew
-  # never drops a trust entry when it leaves this list; only `brew untrust` does.
-  #
-  # TODO(human): decide the trust policy. Fill these three bindings from the
-  # data above; each is a list of strings in Homebrew's short spelling
-  # ("owner/tap" for taps, "owner/tap/pkg" for formulae and casks).
-  #
-  # Available: usedTaps, officialTaps, qualifiedBrews, qualifiedCasks.
-  trustedTaps = [ ];
-  trustedFormulae = [ ];
-  trustedCasks = [ ];
 in
 
 {
@@ -113,11 +92,6 @@ in
     user = "eyouga";
     taps = listToAttrs (map (t: nameValuePair (repoKey t) tapSources.${t}) usedTaps);
     mutableTaps = false;
-    trust = {
-      taps = trustedTaps;
-      formulae = trustedFormulae;
-      casks = trustedCasks;
-    };
   };
 
   homebrew = {
