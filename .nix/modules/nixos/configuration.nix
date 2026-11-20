@@ -39,31 +39,9 @@
     };
   };
 
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu.swtpm.enable = true;
-    };
-    containers.enable = true;
-    podman = {
-      enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
-    spiceUSBRedirection.enable = true;
-  };
-
-  environment.systemPackages = with pkgs; [
-    podman-compose
-  ];
-
   users.users.eyouga = {
     isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "podman"
-      "libvirtd"
-    ];
+    extraGroups = [ "wheel" ];
   };
 
 }

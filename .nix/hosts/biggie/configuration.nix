@@ -15,6 +15,7 @@
     ../../modules/nixos/games.nix
     ../../modules/nixos/waydroid.nix
     ../../modules/nixos/maintenance.nix
+    ../../modules/nixos/virtualisation.nix
     ../../modules/wm/plasma.nix
   ];
 
