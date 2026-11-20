@@ -1,5 +1,5 @@
 {
-  description = "nix-darwin flake boilerplate";
+  description = "eyouga's machines: def-jam and biggie (NixOS), eminem (nix-darwin), install ISOs";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
