@@ -21,7 +21,7 @@ mapfile -t lua < <(git ls-files '*.lua')
 luacheck -q "${lua[@]}" || fail luacheck
 stylua --check "${lua[@]}" || fail "stylua: run stylua on these"
 
-mapfile -t sh < <(git ls-files '*.sh')
+mapfile -t sh < <(git ls-files '*.sh' '.nix/scripts/hooks/*')
 mapfile -t zsh < <(git ls-files .zshrc '*.zsh' ':!.p10k.zsh')
 shellcheck "${sh[@]}" || fail shellcheck
 shfmt -d "${sh[@]}" "${zsh[@]}" || fail "shfmt: run shfmt -w on these"
