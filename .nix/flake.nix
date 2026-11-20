@@ -82,6 +82,28 @@
           modules = [ ./hosts/isos/graphical.nix ];
         };
       };
+      # The tools CI runs, the same on the Mac: `nix develop ./.nix -c .nix/scripts/ci/lint.sh`.
+      devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          default = pkgs.mkShellNoCC {
+            packages = with pkgs; [
+              actionlint
+              deadnix
+              lua51Packages.luacheck
+              nixfmt
+              shellcheck
+              shfmt
+              statix
+              stylua
+              zsh
+            ];
+          };
+        }
+      );
       # nix build .#iso-minimal / .#iso-graphical
       packages.x86_64-linux = {
         iso-minimal = self.nixosConfigurations.iso-minimal.config.system.build.isoImage;

@@ -4,7 +4,6 @@ on:
   pull_request:
   push:
     branches: [master]
-    paths: [".nix/**", ".github/workflows/**"]
 permissions:
   contents: read
 jobs:
@@ -16,4 +15,4 @@ jobs:
         with:
           persist-credentials: false
       - uses: cachix/install-nix-action@3dc140bfc76c49fbd4dd958429132e3746bcb086 # v31.11.5
-      - run: .nix/scripts/ci/build-hosts.sh
+      - run: nix develop ./.nix -c .nix/scripts/ci/all.sh

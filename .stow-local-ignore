@@ -30,3 +30,7 @@ _darcs
 
 # GitHub reads these from the repo; nothing in $HOME needs them.
 \.github
+
+# Repo tooling, read in place. Linked into $HOME it would apply to everything there.
+^/\.editorconfig
+^/\.luacheckrc

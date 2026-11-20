@@ -1,0 +1,4 @@
+# repeated_keys: these files are organised by topic, so `systemd.*` or
+# `services.*` appear once per topic they serve; merging them would scatter
+# each topic. Decided in the hygiene review (guideline 5).
+disabled = ["repeated_keys"]
