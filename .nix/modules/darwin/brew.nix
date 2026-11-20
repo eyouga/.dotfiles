@@ -107,9 +107,6 @@ in
       }
       "mas"
     ];
-    extraConfig = ''
-      cask_args appdir: "~/Applications/Brew"
-    '';
     taps = usedTaps;
     casks = [
       "activitywatch"
