@@ -22,7 +22,7 @@
     kdePackages.partitionmanager # Optional Manage the disk devices, partitions and file systems on your computer
     hardinfo2 # System information and benchmarks for Linux systems
     haruna # Open source video player built with Qt/QML and libmpv
-    inputs.kwin-effects-better-blur-dx.packages.${pkgs.system}.default # Wayland
+    inputs.kwin-effects-better-blur-dx.packages.${pkgs.stdenv.hostPlatform.system}.default # Wayland
     wayland-utils # Wayland utilities
     wl-clipboard # Command-line copy/paste utilities for Wayland
   ];
