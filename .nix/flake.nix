@@ -61,7 +61,7 @@
         # m1-macbook
         eminem = darwin.lib.darwinSystem {
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/eminem.nix ];
+          modules = [ ./hosts/eminem/configuration.nix ];
         };
       };
       nixosConfigurations = {
