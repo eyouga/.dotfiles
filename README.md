@@ -21,7 +21,8 @@ the apps.
 - **def-jam and biggie** also upgrade themselves every night from this repository
   on GitHub (`.nix/modules/nixos/maintenance.nix`): a change that isn't pushed is
   undone by the next upgrade.
-- **Stow:** `stow .` from the root. def-jam runs it at every boot.
+- **Stow:** `stow .` from the root. def-jam runs it at every boot, and after each
+  upgrade moves its clone to the commit it deployed.
 
 ## Checks
 

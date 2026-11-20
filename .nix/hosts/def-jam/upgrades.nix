@@ -11,8 +11,47 @@ in
   # takes patches only; a new minor is a decision, in this line.
   services.k3s.package = pkgs.k3s_1_36;
 
-  # A failed upgrade leaves the old system running, quietly unpatched.
-  systemd.services.nixos-upgrade.unitConfig.OnFailure = [ "unit-failed@%N.service" ];
+  systemd.services.nixos-upgrade.unitConfig = {
+    # A failed upgrade leaves the old system running, quietly unpatched.
+    OnFailure = [ "unit-failed@%N.service" ];
+    OnSuccess = [ "dotfiles-follow-deploy.service" ];
+  };
+
+  # ~/.dotfiles, which stow links into the home at boot (configuration.nix),
+  # moves to the commit the upgrade just deployed. Nix's fetcher cache still
+  # holds which one that was; the long tarball-ttl keeps nix from asking GitHub
+  # again, where master may have moved since. Local changes there stop it.
+  systemd.services.dotfiles-follow-deploy = {
+    description = "Check out the deployed commit in ~/.dotfiles";
+    unitConfig = {
+      OnFailure = [ "unit-failed@%N.service" ];
+      ConditionPathExists = "/home/eyouga/.dotfiles/.git";
+    };
+    path = [
+      config.nix.package
+      pkgs.git
+      pkgs.jq
+      pkgs.util-linux
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      WorkingDirectory = "/home/eyouga/.dotfiles";
+    };
+    script = ''
+      rev=$(nix flake metadata --json --option tarball-ttl 4294967295 \
+        '${config.system.autoUpgrade.flake}' | jq -er .revision)
+      as_eyouga() { runuser -u eyouga -- "$@"; }
+      if [ -n "$(as_eyouga git status --porcelain)" ]; then
+        echo "local changes: ~/.dotfiles left at $(as_eyouga git rev-parse --short HEAD)" >&2
+        exit 1
+      fi
+      as_eyouga git fetch --quiet https://github.com/eyouga/.dotfiles.git "$rev"
+      as_eyouga git checkout --quiet --detach "$rev"
+      # New files get their links now; links to removed ones go with the next
+      # boot's fresh home.
+      systemctl start stow-dotfiles.service
+    '';
+  };
 
   # Each boot needs the LUKS passphrase, so reboots stay a person's job: tell them.
   # Daily at a waking hour, not after the 02:00 switch. Only the kernel and its
